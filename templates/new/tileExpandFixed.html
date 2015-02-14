@@ -1,0 +1,171 @@
+<div class="sr_tileOuterContainer" ng-mouseenter="tileFixedMouseEnter()">
+	<div class="sr_tileOuterFixed">	
+		<div class="sr_tileInner sr_showQVOverlay" id="tileInnerFixed_{{fixedTileItem.id}}">
+			<div class="sr_qvOverlayOuter group">
+				<div class="sr_qvOverlay group" ng-mouseleave="tileMouseLeaveFixed()">
+					<div class="sr_qvOverlayClose" stopeventpropagation ng-click="bodyCloseTileLarge(fixedTileItem)">
+						&times;
+					</div>
+					<div class="sr_qvOverlayRow group">
+						<div class="sr_qvOverlayImageColumn group">
+							<div class="sr_qvOverlayImageContainer">
+								<div class="sr_qvOverlayImage" style="background-image: url({{fixedTileItem.images[0]}})"></div>
+							</div>
+							<div class="sr_qvOverlayThumbnails">
+								<div class="sr_qvOverlayThumbnail"></div>
+								<div class="sr_qvOverlayThumbnail"></div>
+								<div class="sr_qvOverlayThumbnail"></div>
+							</div>
+						</div>
+
+						<div class="sr_qvOverlayInfoColumn group">
+	<!-- QV OVERLAY INITIAL -->
+							<span ng-show="!fixedTileItem.collectionActive && !fixedTileItem.confirmActive && !fixedTileItem.payActive">
+								<div class="sr_qvOverlayTitle">
+									{{fixedTileItem.title}}
+								</div>
+								<div class="sr_qvOverlayPrice">
+									{{fixedTileItem.price}}
+								</div>
+								<div class="sr_qvOverlayWas" ng-if="fixedTileItem.was">
+									{{fixedTileItem.was}}
+								</div>
+
+								<div class="sr_qvOverlayStars">
+									<span class="fa fa-star" ng-repeat="dummyStar in maxStars | limitTo: fixedTileItem.rating"></span>
+									<span class="fa fa-star-o" ng-repeat="star in maxStars | limitTo: maxStars.length - fixedTileItem.rating"></span>
+								</div>
+
+								<div class="sr_qvOverlayParagraph">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda recusandae tempore dolor, animi alias totam aut doloremque debitis expedita deserunt excepturi sequi pariatur, obcaecati iusto consectetur eum quaerat dolores consequuntur!
+								</div>
+								
+								<div class="sr_qvOverlayActions group">
+									<div class="buttonGrey sr_qvOverlayButton" ng-click="openPDP(fixedTileItem, true, false)" stopeventpropagation>
+										More Details
+									</div>
+									<span class="sr_qvOverlayButtonIcon ico ico-ValentinesDay"></span>
+									<span class="sr_qvOverlayButtonIcon fa fa-plus"></span>
+								</div>
+
+								<div class="sr_qvOverlaySeeMoreHeader">
+									See More Like This
+								</div>
+								<div class="sr_qvOverlaySeeMoreTags group">
+									<div class="buttonGrey" ng-repeat="tag in fixedTileItem.seeMore" ng-click="searchRouter({'seeMoreClick': tag})">
+										{{tag}}
+									</div>
+								</div>
+							</span>
+							
+	<!-- QV OVERLAY SECONDARY -->
+							<span ng-show="fixedTileItem.collectionActive">
+								<div class="sr_qvOverlayTitle">
+									Enter Your Details
+								</div>
+
+								<div class="productInfoContinueShopping"  ng-click="bodyCloseTileLarge(fixedTileItem)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="qvForm form-group">
+									<label for="exampleInputEmail1">Email address</label>
+									<input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+								</div>
+
+								<div class="qvForm form-group">
+									<label for="exampleInputPassword1">Phone Number</label>
+									<input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+								</div>
+								  
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Sign up to newsletter
+									</label>
+								</div>
+								
+								<div class="qvReserve" ng-click="changeQVExpand(fixedTileItem, 'confirmActive')" stopeventpropagation>
+									Reserve
+								</div>
+							</span>
+
+	<!-- QV OVERLAY SECONDARY -->
+							<span ng-show="fixedTileItem.confirmActive">
+								<div class="sr_qvOverlayTitle">
+									Thank you
+								</div>
+
+								<div class="productInfoContinueShopping"  ng-click="bodyCloseTileLarge(fixedTileItem)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+									Your reservation is now complete and being prepared for your arrival. You should receive a confirmation email shortly.
+								</div>
+
+								<div class="productInfoBoxResDetails">
+									<div class="productInfoBoxResRow">
+										Reservation Number: 12345
+									</div>
+									<div class="productInfoBoxResRow">
+										Collect from <strong>Milton Keynes</strong>
+									</div>
+									<div class="productInfoBoxResRow">
+										Available to collect in <strong>90 mins</strong>
+									</div>	
+								</div>
+							</span>
+							
+							<span ng-show="fixedTileItem.payActive">
+								<div class="sr_qvOverlayTitle">
+									Payment method
+								</div>
+
+								<div class="productInfoContinueShopping" ng-click="bodyCloseTileLarge(fixedTileItem)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+									Choose how you would like to pay
+								</div>
+
+								<div class="productInfoBoxResCardDetails">
+									<img src="img/payment.png" alt="">
+								</div>
+							</span>
+						</div>
+					</div>
+
+	<!-- QV OVERLAY BOTTOM SECTION ONE -->						
+						
+					<div class="sr_qvOverlayBottom" ng-show="!fixedTileItem.collectionActive && !fixedTileItem.confirmActive && !fixedTileItem.payActive"stopeventpropagation>
+						<div class="sr_qvOverlayBottomCollect" ng-click="changeQVExpand(fixedTileItem, 'collectionActive')" stopeventpropagation>
+							<span class="ico ico-ApplyInStore"></span>
+							Collect
+						</div>
+						<div class="sr_qvOverlayBottomDelivery" ng-click="changeQVExpand(fixedTileItem, 'payActive')" stopeventpropagation>
+							<span class="ico ico-Delivery"></span>
+							Deliver
+						</div>
+					</div>
+
+	<!-- QV OVERLAY BOTTOM SECTION TWO -->	
+
+					<div class="productInfoPayQuestion" ng-show="fixedTileItem.confirmActive">
+						<div class="productInfoPayQuestionIcon">
+							<span class="ico ico-fasttrack"></span>
+						</div>
+
+						<span class="productInfoPayQuestionText">
+							Would you like to pay now?
+						</span>
+						
+						<div class="productInfoPayNowButton" ng-click="changeQVExpand(fixedTileItem, 'payActive')" stopeventpropagation>
+							Pay Now
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

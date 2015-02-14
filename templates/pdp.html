@@ -1,0 +1,595 @@
+<span navigation-mobile></span>
+<span mobile-menu></span>
+
+<div class="stickyNavs stickyNavsPDP">
+	<div navigation-sticky></div>
+
+	<div class="subnavSticky" >
+		<div class="subnavStickyInner">
+			<span class="xLeftNavItem" ng-class="{'active': activeSection === 'overview'}" ng-click="changeRightPos('overview')">Overview</span>
+			<span class="xLeftNavItem" ng-class="{'active': activeSection === 'features'}" ng-click="changeRightPos('features')">Features</span>
+			<span class="xLeftNavItem" ng-class="{'active': activeSection === 'richMedia'}" ng-click="changeRightPos('richMedia')">Rich Media</span>
+			<span class="xLeftNavItem" ng-class="{'active': activeSection === 'reviews'}" ng-click="changeRightPos('reviews')">Reviews</span>
+			<span class="xLeftNavItem" ng-class="{'active': activeSection === 'related'}" ng-click="changeRightPos('related')">Related</span>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="xContainer xDesign2" style="height: {{xPageHeight}}px" style="padding-top: 50px;">
+	
+ 	<div class="xLeftContainer" style="position: fixed; bottom: 0;"  ng-show="item">
+ 		<div class="xLeftContainerInner">
+ 			<div class="xLeftInner" style="padding-top: {{xLeftPadding}}px; padding-bottom: {{xLeftPadding}}px">
+ 				<div class="xLeftNav group">
+ 					<span class="xLeftNavItem" ng-class="{'active': activeSection === 'overview'}" ng-click="changeRightPos('overview')">Overview</span>
+ 					<span class="xLeftNavItem" ng-class="{'active': activeSection === 'features'}" ng-click="changeRightPos('features')">Features</span>
+ 					<span class="xLeftNavItem" ng-class="{'active': activeSection === 'richMedia'}" ng-click="changeRightPos('richMedia')" ng-if="item.seeMore.indexOf('Drill') > -1 || item.seeMore.indexOf('Drills') > -1 || item.seeMore.indexOf('Sofas') > -1">
+ 						Rich Media
+ 					</span>
+ 					<span class="xLeftNavItem" ng-class="{'active': activeSection === 'reviews'}" ng-click="changeRightPos('reviews')">Reviews</span>
+ 					<span class="xLeftNavItem" ng-class="{'active': activeSection === 'related'}" ng-click="changeRightPos('related')">Related</span>
+ 				</div>
+
+ 				<div class="xLeftTitle" ng-bind="item.title">
+ 				</div>
+
+ 				<div class="xLeftInfoRow">
+ 					<span class="xLeftProductNumber">
+ 						{{item.id}}
+ 					</span>
+ 					<span class="xLeftStarsContainer" ng-click="changeRightPos('reviews')">
+ 						<span class="xLeftStars">
+ 							<span class="fa fa-star"></span>
+ 							<span class="fa fa-star"></span>
+ 							<span class="fa fa-star"></span>
+ 							<span class="fa fa-star"></span>
+ 							<span class="fa fa-star-o"></span>
+ 						</span>
+ 						<span class="xLeftStarsNumber">
+ 							(11)
+ 						</span>
+ 					</span>
+ 					<span class="xLeftLikes">
+ 						10
+ 						<span class="fa fa-heart"></span>
+ 					</span>
+ 					<span class="xLeftOffers">
+ 						2 Special Offers
+ 					</span>
+ 				</div>
+
+ 				<div class="xLeftParagraph">
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur magni aut architecto eaque dicta dolore, nihil eius iste ad porro animi doloribus cumque maxime eum expedita eveniet velit delectus inventore.
+ 				</div>
+
+ 				<div class="xLeftPrice" ng-bind="item.price">
+ 					
+ 				</div>
+
+ 				<div class="xLeftColours group">
+ 					<div class="xLeftColour red"></div>
+ 					<div class="xLeftColour grey"></div>
+ 					<div class="xLeftColour darkGrey"></div>
+ 				</div>
+
+ 				<div class="xLeftGetRow group">
+ 					<div class="xLeftGetInner">
+ 						<div class="xLeftGetControl">
+ 							<span class="fa fa-minus"></span>
+ 						</div>
+ 						<input type="text" class='xLeftGetInput' ng-model="itemQuantity">
+ 						<div class="xLeftGetControl">
+ 							<span class="fa fa-plus"></span>
+ 						</div>
+
+ 						<div class="xLeftGetButton" ng-click="showMapPDP()">
+ 							Get It Now
+ 						</div>
+
+ 						<div class="getItNowExtra" ng-if="deliveryOptions[0].showType !== 'unknown'">
+ 							<span ng-if="deliveryOptions[0].showType === 'collection'">
+ 								Collection From
+ 								<span>{{deliveryOptions[0].collection}}</span>
+ 								in 2 hours
+ 							</span>
+ 							<span ng-if="deliveryOptions[0].showType === 'delivery'">
+ 								Delivery To
+ 								<span>{{deliveryOptions[0].deliveryText}}</span>
+ 								by tomorrow (£3.95)
+ 							</span>
+ 							<span class="getItNowExtraChange" ng-click="showMapPDP(true)">
+ 								Change
+ 							</span>
+ 						</div>
+ 						
+ 					</div>
+ 				</div>
+
+ 				<div class="xLeftFooterRow group">
+ 					<div class="xLeftFooterRowLeft">
+ 						<div class="xLeftFooterRowLeftItem" ng-click="showMap = 'collection'">Collect</div>
+ 						<div class="xLeftFooterRowLeftItem"  ng-click="showMap = 'delivery'">Deliver</div>
+ 						<div class="xLeftFooterRowLeftItem">Returns</div>
+ 						<div class="xLeftFooterRowLeftItem">Buyer's Guide</div>
+
+ 					</div>
+ 					<div class="xLeftFooterRowRight">
+ 						<span class="fa fa-facebook"></span>
+ 						<span class="fa fa-twitter"></span>
+ 						<span class="fa fa-google-plus"></span>
+ 						<span class="fa fa-pinterest"></span>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+
+		<div class="xLeftMap" style="height: {{xHeight}}px;" ng-class="{'shown': showMap}"  mapcanvaspdp>
+			<div class="xLeftMapInner" id='mapcontainerpdp'>
+			</div>
+
+			<div class="xMapPopup" ng-class="{'xMapPopupStoreSearch' : showMap === 'storeSearch'}">
+				<div class="hideMap" ng-click="showMap = false">
+					<span class="fa fa-times"></span>
+				</div>
+				<span ng-show="showMap === 'deliveryOrCollection'">
+					<div class="xMapTitle">
+						Getting your item
+					</div>
+
+					<div class="xMapSubtitle">
+						Please select whether you would like your item delivered, or reserved for you to collect in store
+					</div>
+
+					<div class="xMapButton" ng-click="showMap = 'delivery'">
+						Delivery
+					</div>
+					<div class="xMapButton" ng-click="showMap = 'collection'">
+						Reserve for Store Collection
+					</div>
+				</span>
+
+				<span ng-show="showMap === 'delivery'">
+					<div class="xMapTitle">
+						Delivery
+					</div>
+					<div class="xMapSubtitle">
+						Enter your postcode for delivery
+					</div>
+					<div class="xMapInputContainer">
+						<span ng-show="!deliveryInputEntered">
+							<input type="text" class="xMapInput" ng-enter="addToBasketInit([item])" ng-model="xMapDeliveryText">
+							<div class="xLeftDeliveryButton" ng-click="deliveryInputEntered = true">
+								Go!
+							</div>
+						</span>
+
+						<span ng-show="deliveryInputEntered">
+							<div class="dropdown-toggle xMapDeliveryDropdownHeader">
+								Select Your Full Address
+
+								<div class="xLeftDeliveryButton">
+									<span class="ico ico-DropDown"></span>
+								</div>
+							</div>
+							<ul class="dropdown-menu xMapDeliveryDropdownMenu" stopeventpropagation>
+								<li ng-click="addToBasketInit([item])">
+									1 Example Boulevard
+								</li>
+								<li ng-click="addToBasketInit([item])">
+									2 Example Boulevard
+								</li>
+								<li ng-click="addToBasketInit([item])">
+									3 Example Boulevard
+								</li>
+								<li ng-click="addToBasketInit([item])">
+									4 Example Boulevard
+								</li>
+							</ul>
+						</span>
+					</div>
+				</span>
+
+				<span ng-show="showMap === 'collection'">
+					<div class="xMapTitle">
+						Collection
+					</div>
+					<div class="xMapSubtitle">
+						Enter postcode or store location 
+					</div>
+					<div class="xMapInputContainer">
+						<input type="text" class="xMapInput" ng-model="xMapCollection" ng-enter="findLocalStore()">
+						<div class="xMapInputLocation" ng-click="getUserLocationPDP()">
+							<span class="ico ico-Location"></span>
+						</div>
+					</div>
+
+					<div class="xLeftGetButton" ng-click="findLocalStore()">
+						Go!
+					</div>
+				</span>
+
+				<span class="xMapPopupStoreSearchInner" ng-show="showMap === 'storeSearch'">
+					<span class='xMapInputMinLabel'>
+						I want to collect from
+					</span>
+
+					<div class="xMapInputMinContainer">
+						<input type="text" class="xMapInputMin"  ng-enter="findLocalStore()" ng-model="xMapCollection">
+						<div class="xMapInputIcon" ng-show="xMapLoading">
+							<img src="img/loading_wheel.png" alt="">
+						</div>
+					</div>
+				</span>		
+			</div>
+
+			
+		</div>
+	</div>
+	<div class="xRightContainer" style="height: {{xHeight}}px"  ng-show="item">
+		<div class="xRightInner"  >
+
+			<div class="xRightInnerBlock xRightImage" id="overview"  style="height: {{imageContainer + imageContainerAdjust}}px; background-position: left {{-(xHeight / 7)}}px">
+
+				<div class="xRightCentralImage" ng-if="!item.source" style="background-image: url({{item.images[0]}}?wid=1024&hei=1024); top: {{xImageTop}}px; height: {{imageSize}}px; width: {{imageSize}}px;  left: {{xImageLeft}}px"></div>
+				<div class="xRightCentralImage" ng-if="item.source" style="background-image: url({{item.images[0]}}); top: {{xImageTop}}px; height: {{imageSize}}px; width: {{imageSize}}px;  left: {{xImageLeft}}px"></div>
+
+				<div class="xRightThumbnails">
+					<div class="xRightThumbnail" ng-repeat="image in item.images | limitTo: 3"  style="background-image: url({{image}});">
+					</div>
+				</div>
+			</div>
+
+			<div class="xRightPortrait">
+				<div class="xLeftTitle" ng-bind="item.title">
+					
+				</div>
+
+				<div class="xLeftInfoRow">
+					<span class="xLeftProductNumber">
+						1234/567
+					</span>
+					<span class="xLeftStars">
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star"></span>
+						<span class="fa fa-star-o"></span>
+					</span>
+					<span class="xLeftStarsNumber">
+						(11)
+					</span>
+
+					<span class='xLeftBreak'>
+						<span class="xLeftLikes">
+							10
+							<span class="fa fa-heart"></span>
+						</span>
+						<span class="xLeftOffers">
+							2 Special Offers
+						</span>
+					</span>
+					
+				</div>
+
+				<div class="xLeftParagraph">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur magni aut architecto eaque dicta dolore, nihil eius iste ad porro animi doloribus cumque maxime eum expedita eveniet velit delectus inventore.
+				</div>
+
+				<div class="xLeftColours group">
+					<div class="xLeftColour red"></div>
+					<div class="xLeftColour grey"></div>
+					<div class="xLeftColour darkGrey"></div>
+				</div>
+
+				<div class="xLeftPrice" ng-bind="item.price">
+					
+				</div>
+
+				<div class="xLeftGetRow group">
+					<div class="xLeftGetInner">
+						<div class="xLeftGetControl">
+							<span class="fa fa-minus"></span>
+						</div>
+						<input type="text" class='xLeftGetInput' ng-model="itemQuantity">
+						<div class="xLeftGetControl">
+							<span class="fa fa-plus"></span>
+						</div>
+						<div class="xLeftGetButton"  ng-click="addToBasketInit([item])">
+							Get It Now
+						</div>
+					</div>
+				</div>
+				
+				<div class="xLeftFooterRowContainer group">
+					<div class="xLeftFooterRow group">
+						<div class="xLeftFooterRowLeft">
+							<div class="xLeftFooterRowLeftItem" ng-click="showMap = 'collection'">Collect</div>
+							<div class="xLeftFooterRowLeftItem" ng-click="showMap = 'delivery'">Deliver</div>
+							<div class="xLeftFooterRowLeftItem">Returns</div>
+							<div class="xLeftFooterRowLeftItem">Buyer's Guide</div>
+						</div>
+						<div class="xLeftFooterRowRight">
+							<span class="fa fa-facebook"></span>
+							<span class="fa fa-twitter"></span>
+							<span class="fa fa-google-plus"></span>
+							<span class="fa fa-pinterest"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="xRightInnerBlock"  id="features"  style="height: {{xHeight}}px; padding-top: {{(xHeight - 600) /2}}px"> -->
+			<div class="xRightInnerBlock" id="features" style="padding-top: {{featuresPadding}}px; padding-bottom: {{featuresPadding}}px;">
+				<div class="xLeftTitle"  ng-bind="item.title">
+				</div>
+				<div class="xLeftParagraph">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis nostrum dolorem recusandae facere laborum dolores perspiciatis, pariatur error at illo repellat eveniet, dignissimos vitae voluptate similique quasi nam id eos.
+					</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae harum aut dolore laudantium sed optio ratione qui magni, explicabo itaque ipsum, repellendus et corrupti eius ipsa consequuntur. Adipisci, qui, nesciunt.
+					</p>
+				</div>
+
+				<div class="xLeftTitle xFeaturesTitle">
+					Features
+				</div>
+				<div class="xFeaturesRow">
+					<div class="xFeaturesCol">
+						<ul>
+							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+							<li>Reprehenderit amet in quidem, ex facere nulla.</li>
+							<li>Pariatur, saepe rem qui perspiciatis!</li>
+							<li>Provident dolorem cumque eligendi.</li>
+							<li>Sequi unde impedit enim.</li>
+							<li>Nobis illum, voluptatem quia similique.</li>
+						</ul>
+					</div>
+					<div class="xFeaturesCol">
+						<ul>
+							<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+							<li>Reprehenderit amet in quidem, ex facere nulla.</li>
+							<li>Pariatur, saepe rem qui perspiciatis!</li>
+							<li>Provident dolorem cumque eligendi.</li>
+							<li>Sequi unde impedit enim.</li>
+							<li>Nobis illum, voluptatem quia similique.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="xRightInnerBlock xRightRich"  id="richMedia"  style="height: {{xHeight - 53}}px; background-image: url('img/pdp/richmedia.jpg')" ng-if="item.seeMore.indexOf('Drill') > -1 || item.seeMore.indexOf('Drills') > -1" pdp-extras pdpbuttons="drill" addtobasket="addToBasketInit(popup)">
+			</div>
+
+			<div class="xRightInnerBlock xRightRich"  id="richMedia"  style="height: {{xHeight - 53}}px; background-image: url('img/pdp/sofa2.jpg'); background-position: 80%" ng-if="item.seeMore.indexOf('Sofas') > -1" pdp-extras pdpbuttons="sofa" addtobasket="addToBasketInit(popup)">
+			</div>
+
+
+			<div class="xRightRichKit" ng-if="item.seeMore.indexOf('Drill') > -1 || item.seeMore.indexOf('Drills') > -1  || item.seeMore.indexOf('Sofas') > -1">
+				<div class="xRightRichLeft">
+					Get the kit for 
+					<span class="red" ng-if="item.seeMore.indexOf('Drill') > -1 || item.seeMore.indexOf('Drills') > -1">£107.97</span>
+					<span class="red" ng-if="item.seeMore.indexOf('Sofas') > -1">£81.23</span>
+
+					<div class="xLeftGetButton" ng-click="addToBasketInit([
+						{'title': 'BLACK & DECKER LITHIUM ION CORDLESS DRILL DRIVER - 18V','id': 1517262,'price': '£59.99', 'images': ['http://argos.scene7.com/is/image/Argos/1517262_R_Z001A_UC1537134']},
+						{'title': 'Bay Window Curtain Pole Set - Stainless Steel','id': 6237138,'price': '£39.99', 'images': ['http://argos.scene7.com/is/image/Argos/6237138_R_Z001A_UC1274841']},
+						{'title': 'Bosch Protective Spectacles','id': 15172625,'price': '£7.99', 'images': ['/img/pdp/safetygoggles.jpg']},
+					])"
+					 ng-if="item.seeMore.indexOf('Drill') > -1 || item.seeMore.indexOf('Drills') > -1">
+					 Add
+					</div>
+
+					 <div class="xLeftGetButton" ng-click="addToBasketInit([
+					 	{'title': 'Heart of House Bracken Embroidered Cushion - Dove Grey','price': '£11.24','images': ['/img/pdp/cushion.jpg'],'id': 2449607},
+					 	{'title': 'Heart of House Chrissie Rug 170x120cm', 'id': 1420892, 'price': '£69.99','images': ['/img/pdp/rug.jpg']},
+					 ])"
+					  ng-if="item.seeMore.indexOf('Sofas') > -1">
+						Add
+					</div>
+				</div>
+			</div>
+
+			<div class="xRightInnerBlock xRightInnerBlock"  id="reviews"  style="min-height: {{xReviewsHeight}}px">
+				<div class="xRightReviewContainerArrows">
+					<div class="xRightReviewContainerArrow" ng-click="reviewsScroll('minus')">
+						<span class="fa fa-chevron-left"></span>
+					</div>
+					<div class="xRightReviewContainerArrow" ng-click="reviewsScroll('plus')">
+						<span class="fa fa-chevron-right"></span>
+					</div>
+				</div>
+				<div class="xRightReviewContainer" style="width: {{ 3 * xWidth}}px; left: {{reviewsMargin}}px;">
+					<div class="xReviewBlock" style="width: {{xWidth}}px; padding-top: {{reviewsPadding}}px; padding-bottom: {{reviewsPadding}}px; ">
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Great Buy!
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser11
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Wouldn't Recommend
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser31
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<div class="xLeftTitle">
+								A Happy Customer
+							</div>
+							<div class="xReviewDate">
+								11th September 14, shopper01
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+					</div>
+					<!-- <div class="xReviewBlock" style="height: {{xHeight}}px; width: {{xWidth}}px;"> -->
+					<div class="xReviewBlock" style="width: {{xWidth}}px; padding-top: {{reviewsPadding}}px; padding-bottom: {{reviewsPadding}}px; ">
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Great Buy!
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser11
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Wouldn't Recommend
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser31
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<div class="xLeftTitle">
+								A Happy Customer
+							</div>
+							<div class="xReviewDate">
+								11th September 14, shopper01
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+					</div>
+					<!-- <div class="xReviewBlock" style="height: {{xHeight}}px; width: {{xWidth}}px;"> -->
+					<div class="xReviewBlock" style="width: {{xWidth}}px; padding-top: {{reviewsPadding}}px; padding-bottom: {{reviewsPadding}}px; ">
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Great Buy!
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser11
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+								<span class="fa fa-star-o"></span>
+							</div>
+							<div class="xLeftTitle">
+								Wouldn't Recommend
+							</div>
+							<div class="xReviewDate">
+								13th September 14, argosuser31
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+
+						<div class="xReview">
+							<div class="xReviewStars">
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<div class="xLeftTitle">
+								A Happy Customer
+							</div>
+							<div class="xReviewDate">
+								11th September 14, shopper01
+							</div>
+							<div class="xLeftParagraph">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vero at blanditiis sit ex quam suscipit optio, qui excepturi quibusdam architecto, ipsam nulla maxime assumenda fugit molestias nihil cupiditate autem!
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="xRightInnerBlock xRightRelated"  id="related"  style="height: {{xHeight}}px; padding-top: {{(xHeight - 600) /2}}px"> -->
+			<div class="xRightInnerBlock xRightRelated"  id="related"  style="padding-top: {{relatedPadding}}px; padding-bottom: {{relatedPadding}}px">
+				<div class="xLeftTitle">
+					Related Items
+				</div>
+				<div grid-container></div>
+			</div>
+
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+<div class="mobileMenu mobileOnly" ng-class="{'open': mobileMenuOpen}">
+	<span ng-show="mobileMenuOpen === 'initial'">
+		<div class="mobileMenuBlock">
+			<div class="mobileMenuRow" ng-click="mobileMenuOpen = 'categories'">
+				<span class="emph">Browse</span> By Category
+			</div>
+			<div class="mobileMenuRow">
+				<span class="emph">Inspire</span> Me
+			</div>
+		</div>
+
+		<div class="mobileMenuBlock">
+			<div class="mobileMenuRow">
+				<span class="ico ico-Location"></span> Find a Store
+			</div>
+			<div class="mobileMenuRow">
+				<span class="ico ico-ValentinesDay"></span> Saved items
+			</div>
+			<div class="mobileMenuRow">
+				<span class="ico ico-Account"></span> Sign in / Register
+			</div>
+		</div>
+
+		<div class="mobileMenuBlock">
+			<div class="mobileMenuBlockHalf">Help</div>
+			<div class="mobileMenuBlockHalf">Contact Us</div>
+		</div>
+	</span>
+
+	<div class="mobileMenu open mobileMenuSub" ng-show="mobileMenuOpen === 'categories'">
+		<div class="mobileMenuBlock">
+			<span ng-repeat="category in categories[1][1]">
+				<div class="mobileMenuRow mobileMenuRow_{{category.id}}" ng-class="{'open' : category.open}" ng-click="toggleMobileCategory(category)">
+					{{category.title}}
+					<div class="mobileMenuRowDropdown"  ng-class="{'rotate180' : category.open}">
+						<span class="ico-DropDown"></span>
+					</div>
+				</div>
+
+				<div class="mobileMenuRow mobileMenuRowSub mobileMenuRow_{{category.id}}" ng-repeat="subCategory in categories[2][category.id]" ng-class="{'openSub' : category.open}" ng-click="categoryClickMobile(subCategory.title)">
+					{{subCategory.title}}
+				</div>
+			</span>
+		</div>
+	</div>
+</div>

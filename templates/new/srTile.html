@@ -1,0 +1,232 @@
+	
+<div class="sr_tileOuter" ng-class="{'sr_tileOuterLarger' : item.tileActiveSmall}" ng-mouseleave="tileMouseLeaveSmall(item)">
+	<div class="sr_arrow" ng-if="quickviewItem.id === item.id && (item.type==='product' || item.type==='specialProduct')">
+		<div class="sr_arrowInner"  ng-if="quickviewItem.id && (quickviewItem.id === item.id)"></div>	
+	</div>
+	<div class="sr_tileInner" ng-class="{'sr_showQVOverlay': item.tileActive}" id="tileInner_{{item.id}}">
+<!-- PRODUCT TILE -->
+		<span ng-if="item.type==='product' || item.type==='specialProduct'" ng-mouseenter="tileMouseEnter(item)" ng-click="openPDP(item)">
+<!-- INITIAL TILE -->	
+			<div class="hiddenQV"  stopeventpropagation>
+				<span class="hiddenQVQV" ng-click="openQuickview(item)">
+					<span class="fa fa-eye"></span>
+					QUICK VIEW
+				</span>
+			</div>
+
+			<div class="sr_imageContainer" ng-init="item.activeImage = 0">
+				<div class="sr_image" style="background-image: url({{item.images[item.activeImage]}})">
+				</div>
+			</div>
+
+			<div class="productImagePips" stopeventpropagation>
+				<span class="fa fa-circle" ng-repeat="pip in item.images" ng-init="item.pips = ['active']" ng-class="{'fa-circle-thin': !item.pips[$index]}" ng-mouseenter="pipsHover(item, $index)" ng-mouseleave="pipsLeave(item, $index)" ng-click="pipsClick(item, $index)">
+				</span>
+			</div>
+
+			<div class="sr_info group" ng-class="{'sr_infoWithNumber' : (item.bestSeller  && !searchActive)}">
+				<div class="sr_bestSeller" ng-if="item.bestSeller && !searchActive" once-text="item.bestSeller"></div>
+
+				<div class="sr_title">
+					{{item.title}}
+				</div>
+				<div class="sr_price">
+					{{item.price}}
+				</div>
+				<div class="sr_was nonMobile" ng-if="item.was">
+					{{item.was}}
+				</div>
+
+				<div class="sr_stars" ng-if="!item.bestSeller && ctrl !== 'pdpCtrl'">
+					<span class="fa fa-star" ng-repeat="dummyStar in maxStars | limitTo: item.rating"></span>
+					<span class="fa fa-star-o" ng-repeat="star in maxStars | limitTo: maxStars.length - item.rating"></span>
+				</div>
+			</div>
+
+					
+<!-- QV OVERLAY -->
+			<div class="sr_qvOverlayOuter group" ng-mouseleave="tileMouseLeave(item)">
+				<div class="sr_qvOverlay group" >
+					<div class="sr_qvOverlayClose" stopeventpropagation ng-click="bodyCloseTileLarge(item)">
+						&times;
+					</div>
+					<div class="sr_qvOverlayRow group">
+						<div class="sr_qvOverlayImageColumn group">
+							<div class="sr_qvOverlayImageContainer">
+								<div class="sr_qvOverlayImage" style="background-image: url({{item.images[0]}})"></div>
+							</div>
+							<div class="sr_qvOverlayThumbnails">
+								<div class="sr_qvOverlayThumbnail"></div>
+								<div class="sr_qvOverlayThumbnail"></div>
+								<div class="sr_qvOverlayThumbnail"></div>
+							</div>
+						</div>
+
+						<div class="sr_qvOverlayInfoColumn group">
+		<!-- QV OVERLAY INITIAL -->
+							<span ng-show="!item.collectionActive && !item.confirmActive && !item.payActive">
+								<div class="sr_qvOverlayTitle">
+									{{item.title}}
+								</div>
+								<div class="sr_qvOverlayPrice">
+									{{item.price}}
+								</div>
+								<div class="sr_qvOverlayWas" ng-if="item.was">
+									{{item.was}}
+								</div>
+
+								<div class="sr_qvOverlayStars">
+									<span class="fa fa-star" ng-repeat="dummyStar in maxStars | limitTo: item.rating"></span>
+									<span class="fa fa-star-o" ng-repeat="star in maxStars | limitTo: maxStars.length - item.rating"></span>
+								</div>
+
+								<div class="sr_qvOverlayParagraph">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda recusandae tempore dolor, animi alias totam aut doloremque debitis expedita deserunt excepturi sequi pariatur, obcaecati iusto consectetur eum quaerat dolores consequuntur!
+								</div>
+								
+								<div class="sr_qvOverlayActions group">
+									<div class="buttonGrey sr_qvOverlayButton" ng-click="openPDP(item, true, false)" stopeventpropagation>
+										More Details
+									</div>
+									<span class="sr_qvOverlayButtonIcon ico ico-ValentinesDay"></span>
+									<span class="sr_qvOverlayButtonIcon fa fa-plus"></span>
+								</div>
+
+								<div class="sr_qvOverlaySeeMoreHeader">
+									See More Like This
+								</div>
+								<div class="sr_qvOverlaySeeMoreTags group">
+									<div class="buttonGrey" ng-repeat="tag in item.seeMore" ng-click="searchRouter({'seeMoreClick': tag})">
+										{{tag}}
+									</div>
+								</div>
+							</span>
+									
+		<!-- QV OVERLAY SECONDARY -->
+							<span ng-show="item.collectionActive">
+								<div class="sr_qvOverlayTitle">
+									Enter Your Details
+								</div>
+
+								<div class="productInfoContinueShopping"  ng-click="bodyCloseTileLarge(item)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="qvForm form-group">
+									<label for="exampleInputEmail1">Email address</label>
+									<input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+								</div>
+
+								<div class="qvForm form-group">
+									<label for="exampleInputPassword1">Phone Number</label>
+									<input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+								</div>
+								  
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Sign up to newsletter
+									</label>
+								</div>
+								
+								<div class="qvReserve" ng-click="changeQVExpand(item, 'confirmActive')" stopeventpropagation>
+									Reserve
+								</div>
+							</span>
+
+		<!-- QV OVERLAY SECONDARY -->
+							<span ng-show="item.confirmActive">
+								<div class="sr_qvOverlayTitle">
+									Thank you
+								</div>
+
+								<div class="productInfoContinueShopping"  ng-click="bodyCloseTileLarge(item)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+									Your reservation is now complete and being prepared for your arrival. You should receive a confirmation email shortly.
+								</div>
+
+								<div class="productInfoBoxResDetails">
+									<div class="productInfoBoxResRow">
+										Reservation Number: 12345
+									</div>
+									<div class="productInfoBoxResRow">
+										Collect from <strong>Milton Keynes</strong>
+									</div>
+									<div class="productInfoBoxResRow">
+										Available to collect in <strong>90 mins</strong>
+									</div>	
+								</div>
+							</span>
+							
+							<span ng-show="item.payActive">
+								<div class="sr_qvOverlayTitle">
+									Payment method
+								</div>
+
+								<div class="productInfoContinueShopping" ng-click="bodyCloseTileLarge(item)" stopeventpropagation>
+									or continue shopping
+								</div>
+
+								<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+									Choose how you would like to pay
+								</div>
+
+								<div class="productInfoBoxResCardDetails">
+									<img src="img/payment.png" alt="">
+								</div>
+							</span>
+						</div>
+					</div>
+
+		<!-- QV OVERLAY BOTTOM SECTION ONE -->						
+								
+					<div class="sr_qvOverlayBottom" ng-show="!item.collectionActive && !item.confirmActive && !item.payActive"stopeventpropagation>
+						<div class="sr_qvOverlayBottomCollect" ng-click="changeQVExpand(item, 'collectionActive')" stopeventpropagation>
+							<span class="ico ico-ApplyInStore"></span>
+							Collect
+						</div>
+						<div class="sr_qvOverlayBottomDelivery" ng-click="changeQVExpand(item, 'payActive')" stopeventpropagation>
+							<span class="ico ico-Delivery"></span>
+							Deliver
+						</div>
+					</div>
+
+		<!-- QV OVERLAY BOTTOM SECTION TWO -->	
+
+					<div class="productInfoPayQuestion" ng-show="item.confirmActive">
+						<div class="productInfoPayQuestionIcon">
+							<span class="ico ico-fasttrack"></span>
+						</div>
+
+						<span class="productInfoPayQuestionText">
+							Would you like to pay now?
+						</span>
+						
+						<div class="productInfoPayNowButton" ng-click="changeQVExpand(item, 'payActive')" stopeventpropagation>
+							Pay Now
+						</div>
+					</div>
+				</div>
+			</div>
+		</span> <!-- product -->
+
+<!-- PROMO TILE -->
+		<span ng-if="item.type==='promo'" ng-mouseenter="tileMouseEnter(item)">
+			<div class="sr_promoInner promoImage" 
+				ng-style="{'background-image': 'url('+item.image+')'}"
+				ng-class="item.colour" 
+				once-if="item.layout === 'image' && item.imageSize !== 'full'">	
+				<div class="sr_infoDummy"></div>		
+			</div>
+
+			<div class="sr_promoInner promoImage promoImageFull" 
+				ng-style="{'background-image': 'url('+item.image+')'}"
+				ng-class="item.colour" 
+				once-if="item.layout === 'image' && item.imageSize === 'full'">	
+				<div class="sr_infoDummy"></div>		
+			</div>
+		</span>
+	</div>
+</div>

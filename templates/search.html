@@ -1,0 +1,529 @@
+<div class="newLoader" ng-show="showLoader">
+ 	<img src="img/loading_wheel.png" alt="">
+ </div>
+
+<div class="sidebarShift" ng-class="{'active' : isSidebar}" sidebar>
+
+<span navigation-mobile></span>
+<span mobile-menu></span>
+
+
+<div class="navigation nonMobile group" ng-class="{'active' : isSidebar}" sidebar>
+	<div class="navigationOffer dropdown">
+		<span class="bold">60 Second</span> Store Collection
+	</div>
+
+	<div class="navigationIcons">
+		<div class="navigationIcon" ng-click="searchIconClick()">
+			<span class="ico-Search"></span>
+		</div>
+		<div class="navigationIcon">
+			<span class="ico-Account"></span>
+		</div>
+
+		<div class="navigationIcon dropdown">
+			<div class="dropdown-toggle">
+				<span class="ico-ValentinesDay"></span>
+			</div>
+			<ul class="dropdown-menu dropdownMenuPrototype" stopeventpropagation settings>
+				<li ng-click="settings.categoryView = 'header'">
+					Category View: Header
+					<span class="fa fa-check" ng-class="{'active' : settings.categoryView === 'header'}"></span>
+				</li>
+				<li ng-click="settings.categoryView = 'grid'">
+					Category View: Grid
+					<span class="fa fa-check" ng-class="{'active' : settings.categoryView === 'grid'}"></span>
+				</li>
+				<li ng-click="settings.pips = true">
+					Expanded Item: Toggle images
+					<span class="fa fa-check" ng-class="{'active' : settings.pips === true}"></span>
+				</li>
+				<li ng-click="settings.pips = false">
+					Expanded Item: Toggle colours
+					<span class="fa fa-check" ng-class="{'active' : settings.pips !== true}"></span>
+				</li>
+				<li ng-click="settings.textExpands = !settings.textExpands">
+					Expanded Item: Show full title
+					<span class="fa fa-check" ng-class="{'active' : settings.textExpands === true}"></span>
+				</li>
+				<li class="divider">Tile Expansion</li>
+				<li ng-click="settings.expand = 'big'">
+					Quickview
+					<span class="fa fa-check" ng-class="{'active' : settings.expand === 'big'}"></span>
+				</li>
+				<li ng-click="settings.expand = 'fixed'">
+					Fixed positioning
+					<span class="fa fa-check" ng-class="{'active' : settings.expand === 'fixed'}"></span>
+				</li>
+				<li ng-click="settings.expand = 'standard'">
+					Regular
+					<span class="fa fa-check" ng-class="{'active' : settings.expand === 'standard'}"></span>
+				</li>
+				<li ng-click="settings.expand = 'none'">
+					No expansion
+					<span class="fa fa-check" ng-class="{'active' : settings.expand === 'none'}"></span>
+				</li>
+				<li class="divider">CSS / Theme/ Design</li>
+				<li ng-click="settings.design = 1">
+					Bordered tiles, grey header
+					<span class="fa fa-check" ng-class="{'active' : settings.design === 1}"></span>
+				</li>
+				<li ng-click="settings.design = 2">
+					Grey Background to Tiles, gradient header
+					<span class="fa fa-check" ng-class="{'active' : settings.design === 2}"></span>
+				</li>
+
+				<!-- <li class="divider">Home Layout</li>
+				<li class="options">
+					<span ng-class="{'active' : settings.home === 1}" ng-click="updateHomeSetting(1)">No Header</span>
+					&middot; 
+					<span ng-class="{'active' : settings.home === 2}" ng-click="updateHomeSetting(2)">Grouped Headers</span>
+					&middot; 
+					<span ng-class="{'active' : settings.home === 3}" ng-click="updateHomeSetting(3)">Separate Headers</span>
+				</li> -->
+				<li class="divider"> Timeline Markers</li>
+				<li class="options">
+					<span ng-class="{'active' : settings.timelineMarker === 'stickyMarkers2'}" ng-click="updateTimelineMarkerSetting('stickyMarkers2')">Black & Right</span>
+					&middot; 
+					<span ng-class="{'active' : settings.timelineMarker === 'stickyMarkersCircle2'}" ng-click="updateTimelineMarkerSetting('stickyMarkersCircle2')">Black & Center</span>
+					<!-- <span ng-class="{'active' : settings.timelineMarker === 'stickyMarkers3'}" ng-click="updateTimelineMarkerSetting('stickyMarkers3')">Black & Right (Circular)</span>
+					&middot;
+					<span ng-class="{'active' : settings.timelineMarker === 'stickyMarkersCircle'}" ng-click="updateTimelineMarkerSetting('stickyMarkersCircle')">Green & Center</span>
+					&middot; 
+					 -->
+				</li>
+			</ul>
+		</div>
+
+		<div class="navigationIcon dropdown">
+			<div class="dropdown-toggle-basket">
+				<span class="ico-Trolley"></span>
+				<div class="basketBadge" ng-show="basketItems.length > 0">
+					{{basketItems.length}}
+				</div>
+			</div>
+			<ul class="dropdown-menu basketDropdown" stopeventpropagation>
+				<span class="emptyBasketItems"  ng-show="basketItems.length === 0">
+					No items in basket
+				</span>
+
+				<div class="basketDropdownInner group" ng-show="basketItems.length > 0 && !justAdded">
+					<div ng-repeat="basketItem in basketItems" class="group basketLi">
+						<div class="basketInfo">
+							<div class="basketImage" style="background-image: url({{basketItem.images[0]}})">
+							</div>
+
+							<div class="basketTitle">
+								{{basketItem.title}}
+							</div>
+							<div class="basketRow">
+								{{basketItem.price}} 
+								<span class="basketQuantity">
+									Qty:
+								</span>
+								<span class="basketQuantityNumber">
+									{{basketItem.quantity}} 
+								</span>
+								<!-- {{basketItem.quantity}}  &times;  -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="basketDropdownInner basketDropdownInnerAdded group" ng-show="basketItems.length > 0 && justAdded">
+					<div class="addedToBagRow">
+						<span class="ico ico-Tick lawnGreenText"></span> Added To Bag
+					</div>
+
+					<div ng-repeat="basketItem in basketItems" class="group basketLi">
+						<div class="basketInfo">
+							<div class="basketImage" style="background-image: url({{basketItem.images[0]}})">
+							</div>
+
+							<div class="basketTitle">
+								{{basketItem.title}}
+							</div>
+							<div class="basketRow">
+								{{basketItem.price}} 
+								<span class="basketQuantity">
+									Qty:
+								</span>
+								<span class="basketQuantityNumber">
+									{{basketItem.quantity}} 
+								</span>
+								<!-- {{basketItem.quantity}}  &times;  -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="basketDropdownInnerAddedSub" ng-show="basketItems.length > 0 && justAdded">
+					<div class="addedToBagRow">
+						Subtotal: <span class="lawnGreenText">£69.99</span>
+					</div>
+					<div class="basketFreeDelivery">
+						Your order qualifies for free delivery
+					</div>
+					<div class="btnArgos btnPurple" ng-click="justAdded = false">
+						View Bag
+					</div>
+					<div class="btnArgos btnLawnGreen" ng-click="goToCheckout()">
+						Checkout
+					</div>
+				</div>
+
+				<div class='group' ng-show="basketItems.length > 0 && !justAdded">
+					<div class="basketButtonRow">
+						<div class="btnArgos btnLawnGreen" ng-click="goToCheckout()">
+							Checkout
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
+	</div>
+
+	<div class="navigationBrowse dropdown" ng-show="settings.categoryView === 'header'">
+		<div class="dropdown-header dropdown-toggle">
+			<div class="byCategory">
+				<span class="bold">Browse</span>  
+				<span class="byCategoryText">By Category</span>
+			</div>
+			<span class="ico-DropDown ico navigationBrowseIco"></span>
+		</div>
+
+		<div class="dropdown-menu categoryContainer" role="menu" aria-labelledby="deliveryOrCollection" stopeventpropagation>
+			<div class="categoryItem categoryItemActive" ng-if="categoryLevel > 1" ng-click="categoryClick('1', '1')">
+				All Categories
+			</div>
+
+			<div class="categoryItem categoryItemHeader" ng-if="categoryLevel > 1" ng-repeat="parent in activeParentCategories" ng-click="categoryClick(parent.parentId, ($index+1))">
+				{{parent.title}}
+			</div>
+			
+			<div class="categoryItem" ng-click="categoryClick(item.id,null,item.title)" ng-repeat="item in categories[categoryLevel][categoryChild]">
+				{{item.title}}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="searchArea" ng-class="{'searchArea_2': settings.design === 2}" ng-init="init()">
+	<div class="searchAreaLogo" ng-click="goToHomePage()">
+		<img src="img/logo.jpg" alt="">
+	</div>
+
+	<div class="searchAreaLookingTextMobile mobileOnly">
+		I'm Looking For
+	</div>
+	<div class="lookingForMobileContainer mobileOnly">
+		<input type="text" class="lookingForMobile mobileOnly" looking-for ng-model="searchTerm">
+		<div class="loadingIcon" ng-show="searchLoading && searchTerm">
+			<img src="img/loading_wheel.png" alt="">
+		</div>
+	</div>
+	
+
+	<div class="searchAreaLooking nonMobile group" ng-class="{'active': searchFocus === 'looking'}" style="width: {{searchAreaBase + searchAreaSize}}px">
+		<span class="searchAreaLookingText">
+			I'm Looking For
+			<span ng-show="!searchTerm && !lookingFocussed">...</span>
+		</span>
+		
+		<span class="searchAreaLookingPseudoInput">
+			{{searchTerm}}
+		</span>
+
+		<span class="searchAreaLookingSpan" >
+			<input type="text" focus="looking" id="searchTermInput" ng-model="searchTerm" looking-for>
+			<div class="searchLoading" ng-show="searchLoading && searchTerm">
+				<img src="img/loading_wheel.png" alt="">
+			</div>
+		</span>
+
+		<span class="ico ico-Search" ng-show="!searchTerm"></span>
+	</div>
+
+
+
+	<div class="searchAreaLocation group" ng-repeat="deliveryOption in deliveryOptions" ng-class="{'active': deliveryOption.showType !== 'unknown', 'searchAreaLocationDelivery': deliveryOption.showType === 'delivery', 'searchAreaLocationHigher' : deliveryOption.showMap, 'wider': deliveryOption.deliveryChosen}" ng-show="searchActive" id="searchAreaLocation_{{$index}}">
+		<div class="searchAreaChoice" ng-show="deliveryOption.show === true && deliveryOption.showType === 'unknown'">
+			Would you like
+			<span class="nonMobile">
+				<span class="red" ng-click="changeDeliveryOption('collection', $index)">Collection</span> or 
+				<span class="red" ng-click="changeDeliveryOption('delivery', $index)">Delivery</span>?
+			</span>
+			<span class="mobileOnly">
+				<div class="searchAreaChoiceRow">
+					<span class="red" ng-click="changeDeliveryOption('collection', $index)">Collection</span> or
+				</div>
+				<div class="searchAreaChoiceRow">
+					<span class="red" ng-click="changeDeliveryOption('delivery', $index)">Delivery</span>
+				</div>
+			</span>
+			
+		</div>
+		
+		<span ng-show="deliveryOption.showType !== 'unknown'">
+			<div class="spanLeft">
+				For
+			</div>
+			<div class="spanLeft dropdown">
+				<span class="dropdownHeader dropdownHeaderMobile dropdown-toggle" ng-click="searchFocus = 'location'">
+					<span class="ico-Delivery" ng-show="deliveryOption.showType === 'delivery'"></span>
+					<span class="ico-ApplyInStore" ng-show="deliveryOption.showType === 'collection'"></span>
+					<span class="ico-DropDown"></span>
+				</span>
+				<ul class="dropdown-menu">
+					<li ng-class="{'active':deliveryOption.showType === 'delivery'}" ng-click="changeDeliveryOption('delivery', $index)">
+						<span class="ico-Delivery ico"></span>
+						Delivery
+					</li>
+					<li ng-class="{'active':deliveryOption.showType === 'collection'}" ng-click="changeDeliveryOption('collection', $index)">
+						<span class="ico-ApplyInStore ico"></span>
+						Collection
+					</li>
+				</ul>
+			</div>
+
+			<div class="spanLeft nonMobile" ng-show="deliveryOption.showType === 'delivery'">To</div>
+			<div class="spanLeft nonMobile" ng-show="deliveryOption.showType === 'collection'">From</div>
+
+<!-- Delivery Input -->
+			<div class="collectionInputContainer dropdown" ng-class="{'wider': deliveryOption.deliveryChosen}" ng-show="deliveryOption.showType === 'delivery'">
+				<div class="deliveryOptionPrepositionMobile mobileOnly">
+					To
+				</div>
+				<span class="dropdownHeader" ng-click="searchFocus = 'location'">
+					<input type="text" class="collectionInput" id="delivery" focus="location" delivery deliveryevent="deliveryTextChanged(data)" arraynumber="$index" ng-model="deliveryOption.deliveryText">
+
+					<div class="collectionInputPlaceholder collectionInputPlaceholderPostcode"  ng-show="!deliveryOption.deliveryText">
+						Postcode
+					</div>
+
+					<span class="ico ico-plusthin deliveryPlus nonMobile" ng-click="additionalLocationClick($index)" ng-show="deliveryOption.deliveryText && $index < 3"></span>
+					<div class="crosscirclecontainer crosscirclecontainerDelivery" ng-click="deleteDeliveryOption($index)" ng-show="deliveryOption.deliveryText">
+						<span class="ico ico-crosscircle"></span>
+					</div>
+				</span>
+				<ul class="dropdown-menu">
+					<li ng-click="deliveryLocationClick(1, $index)">1 Example Boulevard</li>
+					<li ng-click="deliveryLocationClick(2, $index)">2 Example Boulevard</li>
+					<li ng-click="deliveryLocationClick(3, $index)">3 Example Boulevard</li>
+					<li ng-click="deliveryLocationClick(4, $index)">4 Example Boulevard</li>
+				</ul>
+			</div>
+
+<!-- Collection Input -->			
+			<div class="collectionInputContainer collectionInputContainerCollection" ng-show="deliveryOption.showType === 'collection'">
+				<div class="deliveryOptionPrepositionMobile mobileOnly">
+					From
+				</div>
+				<div class="collectionInputPlaceholder nonMobile" ng-show="!deliveryOption.collection">
+					Store Name / Postcode
+				</div>
+				<div class="collectionInputPlaceholder mobileOnly" ng-show="!deliveryOption.collection">
+					Location
+				</div>
+				<div class="collectionInputLocationMobile collectionInputPlaceholderMobile">
+					<span class="ico ico-Location" data-array-number="{{$index}}" html-location></span> 
+				</div>
+					
+				<div class="collectionInputSearchIcon">
+					<span class="red" ng-show="deliveryOption.collectionValid">
+						<div class="crosscirclecontainer"  ng-click="deleteDeliveryOption($index)">
+							<span class="ico ico-crosscircle" ></span>
+						</div>
+						
+						<span class="ico ico-plusthin nonMobile" ng-click="additionalLocationClick($index)" ng-show="$index < 3"></span>
+					</span>	
+				</div>
+
+				<span arraynumber="$index" data-id-helper="{{$index}}">
+					<span class="mapContainer" >
+						<input type="text" class="collectionInput" ng-class="{'collectionInputVerified' : deliveryOption.collectionValid}" id="collection" ng-focus="collectionInputFocus($index)" ng-show="deliveryOption.showType === 'collection'" ng-model="deliveryOption.collection" collection-input data-array-number="{{$index}}">
+
+						<span class="ico ico-Location nonMobile" ng-show="deliveryOption.showType === 'collection' && !deliveryOption.collection" data-array-number="{{$index}}" html-location></span>
+
+						<div class="searchLoading searchingMap" ng-show="deliveryOption.loadingMap">
+							<img src="img/loading_wheel.png" alt="">
+						</div>
+					</span>
+
+					<div class="mapDropdownList" id="mapDropdownList" ng-show="deliveryOption.showList">
+						<div class="mapDropdownListInner">
+							<ul>
+								<li ng-repeat = "store in deliveryOption.storesArray" ng-click="addStoreToSelected(store.name, $parent.$index)">
+									{{store.name}} ({{store.distance}} miles)
+									<!-- <div class="mapDropdownListIcon" ng-click="markerIconClick(store)" stopeventpropagation>
+										<span class="fa fa-map-marker"></span>
+									</div> -->
+								</li>
+							</ul>
+						</div>
+
+						<div class="mapDropdownListToggleMap"  ng-click="toggleMapView($index)">
+							<span class="ico-Location"></span>
+						</div>
+					</div>
+				</span>
+			</div>
+
+			<div class="collectionInputContainerPlus mobileOnly" ng-click="additionalLocationClick($index)" ng-show="((deliveryOption.collectionValid && deliveryOption.showType === 'collection') || deliveryOption.showType === 'delivery' && deliveryOption.deliveryText) && $index < 3 && !deliveryOption.showMap  && !deliveryOptions[$index + 1].show">
+				<span class="ico ico-plusthin"></span>
+			</div>
+
+			<div class="mapDropdown group" stopeventpropagation ng-show="deliveryOption.showMap"  style="left: {{deliveryOption.leftRightMap}}px; right: {{deliveryOption.leftRightMap}}px;">
+				<div class="mapDropDownInner" id="map-canvas-{{$index}}" stopeventpropagation>
+				</div>
+				<div class="mapViewToggle nonMobile" ng-click="toggleMapView($index, true)" ng-show="deliveryOption.showMap">	
+					<span class="fa fa-list"></span>
+				</div>
+				<div class="mapViewToggleMobile mobileOnly" ng-click="toggleMapView($index, true)" ng-show="deliveryOption.showMap">	
+					List View
+				</div>
+				<div class="mapViewClose" ng-click="closeMap()">
+					&times;
+				</div>
+				<div class="mapError" ng-show="deliveryOption.mapError">
+					{{deliveryOption.mapError}}
+				</div>
+			</div>
+		</span>
+	</div>
+</div>
+
+
+
+<div class="stickyNavs" ng-class="{'stickyNavHome' : !onSearch}">
+
+	<div navigation-sticky></div>
+
+	<div class="subnavSticky" ng-show="searchActive">
+		<div class="subnavLeft subnavLeftMain">
+			<div class="subnavLeftItem" ng-click="changeSidebar()">
+				<span class="fa fa-refresh ico"></span>
+				<div class="subnavLeftBlock" ng-class="{'subnavOneLine' : !filters || filters.length === 0}">
+					<div class="subnavLeftBlockTop">
+						<span ng-show="!filters || filters.length === 0">Filter</span>
+						<span class='bold' ng-show="filters && filters.length > 0">Filtering by</span>
+					</div>
+					<div class="subnavLeftBlockBottom" ng-show="filters && filters.length > 0">
+						<span ng-repeat="filter in filters">
+							{{filter}}<span ng-if="!$last">,</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="subnavLeft subnavLeftTablet">
+			<div class="subnavLeftItem" ng-click="changeSidebar()">
+				<span class="fa fa-refresh ico"></span>
+				<div class="subnavLeftBlock" ng-class="{'subnavOneLine' : !filters || filters.length === 0}">
+					<div class="subnavLeftBlockTop">
+						<span ng-show="!filters || filters.length === 0">Filter</span>
+						<span class='bold' ng-show="filters && filters.length > 0">Filtering by</span>
+					</div>
+					<div class="subnavLeftBlockBottom" ng-show="filters && filters.length > 0">
+						<span ng-repeat="filter in filters">
+							{{filter}}<span ng-if="!$last">,</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="subnavLeft subnavLeftMobile">
+			<div class="subnavLeftItem" ng-click="changeSidebar()">
+				<span class="ico ico-Refine"></span>
+				<div class="subnavLeftBlock subnavLeftBlockCenter" ng-class="{'subnavOneLine' : !filters || filters.length === 0}">
+					Refine
+				</div>
+			</div>
+		</div>
+
+		<div class="subnavCenter" ng-show="searchTerm || deliveryText" ng-class="{'subnavOneLine' : deliveryOptions[0].showType !== 'unknown'}" style="margin-left: {{getSubnavCenterMargin()}}px">
+			<div class="subnavCenterIcon">
+				<span class="ico-Search"></span>
+			</div>
+
+			<span class="subnavCenterTop" ng-show="searchTerm" scrolltotop>
+				I'm Looking for <span class="bold" ng-bind="searchTerm"></span>
+			</span>
+
+			<span class="subnavCenterBottom" ng-show="deliveryOptions[0].showType !== 'unknown'">
+				For
+				<span ng-if="(deliveryOptions[0].showType === 'delivery' && deliveryOptions[0].deliveryText) || (deliveryOptions[0].showType === 'collection' && deliveryOptions[0].collection)">
+					<span class="bold" ng-bind="deliveryOptions[0].showType"></span> to 
+				</span>
+				<span ng-if="!(deliveryOptions[0].showType === 'delivery' && deliveryOptions[0].deliveryText) || (deliveryOptions[0].showType === 'collection' && deliveryOptions[0].collection)">
+					Delivery or Collection
+				</span>
+				
+				<span class="bold" ng-bind="deliveryOptions[0].collection" ng-if="deliveryOptions[0].collection"></span>
+				<span class="bold" ng-bind="deliveryOptions[0].deliveryText" ng-if="deliveryOptions[0].deliveryText"></span>
+			</span>
+		</div>
+
+		<div class="subnavRight">
+			View
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default" ng-click="changeViewType('regular')" ng-class="{'active' : viewType === 'regular'}">
+			  	<span class="ico ico-gridview"></span>
+			  </button>
+			  <button type="button" class="btn btn-default nonMobile" ng-click="changeViewType('thumbnails')" ng-class="{'active' : viewType === 'thumbnails'}">
+			  	<span class="ico ico-thumbview"></span>
+			  </button>
+			  <button type="button" class="btn btn-default" ng-click="changeViewType('list')" ng-class="{'active' : viewType === 'list'}">
+			  	<span class="ico ico-listview"></span>
+			  </button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="categoryRow" ng-show="settings.categoryView === 'grid'">
+	<span>
+		Technology
+	</span>
+	<span>
+		Home &amp; Garden
+	</span>
+	<span>
+		Baby &amp; Nursery
+	</span>
+	<span>
+		Toys
+	</span>
+	<span>
+		Sports &amp; Leisure
+	</span>
+	<span>
+		Health &amp; Beauty
+	</span>
+	<span>
+		Clothing
+	</span>
+	<span>
+		Jewellery &amp; Watches
+	</span>
+	<span>
+		Gifts
+	</span>
+</div>	
+
+
+<div grid-container></div>
+
+
+
+
+</div>

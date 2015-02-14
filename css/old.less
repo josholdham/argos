@@ -1,0 +1,619 @@
+@black: #2B2F32;
+@turquoise: #38B7EA;
+@border-color: #E7ECEF;
+@green: #65C178;
+
+@grey: #F3F4F6;
+@grey2: #E7E8E9;
+@grey2b: #CACACA;
+@grey3: #999;
+@grey4: #777;
+@grey5: #555;
+@grey6: #333;
+
+@redLogo: #d83431;
+@red: #db2828;
+@navy: #455469;
+@limeGreen: #53CA36;
+@lawnGreen: #b9cf45;
+@orange: #e78b43;
+@yellow: #fcd439;
+@purple: #9b4c8b;
+@pink: #da4e69;
+@blue: #09b2d1;
+
+@yellow: rgb(235, 206, 0);
+
+@animationSpeed : 1000ms;
+@animationSpeedMed : 800ms;
+@animationSpeedQuicker : 500ms;
+@animationSpeedQuickest : 250ms;
+
+.navOld{
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid @grey2;
+	background-color: #fff;
+	z-index: 50002;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+
+	.logo{
+		height: 50px;
+		width: 50px;
+		background-color: @redLogo;
+		float: left;
+		img{
+			width: 23px;
+			margin: 9px 0px 0px 14px;
+		}
+	}
+
+	.shopByCategory{
+		float: right;
+		line-height: 49px;
+		text-transform: uppercase;
+		border-left: 1px solid @grey2;
+		padding: 0 14px;
+		font-family: 'ArgosCondensed','Open Sans', helvetica, sans-serif;
+		font-size: 18px;
+		color: @grey6;
+
+		.ico-DropDown{
+			padding-left: 6px;
+			font-size: 12px;
+		}
+
+		.dropdown-menu{
+			width: 235px;
+			.border-radius(0px);
+			-webkit-box-shadow: 0px 0px 0px 0px;
+			-moz-box-shadow:    0px 0px 0px 0px;
+			box-shadow:         0px 0px 0px 0px;
+			padding: 0px;
+			font-family: 'Argos','Open Sans', helvetica, sans-serif;
+			text-transform: none;
+			margin-top: 0px;
+
+			li a{
+				line-height: 40px;
+				font-size: 18px;
+				//text-transform: uppercase;
+			}
+			li a:focus{
+				outline: 0px;
+			}
+			li a:hover{
+				background-color: @grey;
+			}
+
+		}
+	}
+	.shopByCategory:hover{
+		background-color: @grey;
+		cursor: pointer;
+	}
+
+	.navIcon{
+		float: right;
+		border-left: 1px solid @grey2;
+		width: 65px;
+		
+
+		a{
+			width: 100%;
+			padding: 0 12px;
+			color: #000;
+			text-align: center;
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			font-size: 24px;
+		}
+		a:hover{
+			background-color: @grey;
+		}
+
+
+		.pseudoLink{
+			width: 100%;
+			padding: 0 12px;
+			color: #000;
+			text-align: center;
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			font-size: 24px;
+		}
+		.pseudoLink:hover{
+			cursor: pointer;
+			background-color: @grey;
+		}
+	}
+	.navIcon:hover{
+		cursor: pointer;
+	}
+
+	.navIcon .pseudoSelectHeader{
+		width: 100%;
+		padding: 0 12px;
+		color: #000;
+		text-align: center;
+		display: block;
+		height: 50px;
+		line-height: 50px;
+		font-size: 24px;
+	}
+	.navIcon .pseudoSelectHeader:hover{
+		background-color: @grey;
+	}
+	.cartPreviewContainer{
+		background-color: @grey;
+		width: 100%;
+		border: 0px;
+		padding: 24px;
+		margin-top: 0px;
+		border-bottom: 1px solid @grey2;
+	}
+	.cartPreviewContainer img{
+		display: block;
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
+	}
+	.cartPreviewContainer img:hover{
+		cursor: pointer;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************
+
+
+
+
+
+	
+		S E A R C H
+
+
+
+
+
+
+
+****************************/
+
+
+.searchPanel{
+	background-color: #fff;
+	width: 100%;
+	clear: both;
+	padding: 165px 0 125px;
+
+	font-size: 44px;
+	font-weight: 400;
+}
+
+.searchPanelText{
+	float: left;
+	line-height: 50px;
+}
+.lookingForRow{
+	width: 80%;
+	max-width: 812px;
+	margin: 0 auto;
+	position: relative;
+	//border: 1px solid green;
+}
+.lookingForRow .inputContainer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-left: 268px;
+	width: 100%;
+}
+.lookingForRow input{
+	//font-size: 24px;
+	font-size: 32px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 48px;
+	width: 100%;
+	display: block;
+}
+.searchingLookingFor{
+	position: absolute;
+	top: 0px;
+	right: 12px;
+	//display: none;
+	
+	font-size: 24px;
+	color: @grey3;
+	.fa{
+		display: block;
+		line-height: 50px;
+	}
+}
+
+.lookingForDetailRow{
+	width: 80%;
+	max-width: 812px;
+	margin: 0 auto;
+	position: relative;
+	//border: 1px solid red;
+	clear: both;
+	margin-top: 12px;
+}
+.lookingForDetailRow .pseudoSelectHeader{
+	margin-left: 22px;
+	background-color: @grey2;
+	padding: 6px 12px 6px 12px;
+	float: left;
+	margin-top: 0px;
+	width: 118px;
+}
+.lookingForDetailRow .pseudoSelectHeader:hover{
+	cursor: pointer;
+}
+.lookingForDetailRow .dropdown-menu{
+	top: 50px;
+	left: 0px;
+	z-index: 2;
+	min-width: 186px;
+	
+}
+.lookingForDetailRow .pseudoSelect ul li a{
+	line-height: 40px;
+	padding-left: 12px;
+	padding-right: 12px;
+}
+.lookingForDetailRow .pseudoSelect ul li a:hover{
+	cursor: pointer;
+}
+.lookingForDetailRow .pseudoSelect ul li a .icons{
+	padding-right: 12px;
+}
+.lookingForDetailRow .icons{
+	display: block;
+	float: left;
+	line-height: 38px;
+	font-size: 32px;
+}
+.lookingForDetailRow .ico-DropDown{
+	font-size: 14px;
+	line-height: 38px;
+	margin-left: 12px;
+	float: right;
+}
+
+.lookingForDetailRowPre{
+	float: left;
+	width: 208px;
+	position: relative;
+	z-index: 1;
+}
+.lookingForDetailRowPost{
+	position: relative;
+	width: calc(~'100% - 208px');
+	top: 0;
+	left: 0;
+	float: right;
+	//padding-left: 208px; // should be 212 if accurate
+	//border: 2px solid green;
+}
+.collectionAt, .deliveryTo{
+	width: 100%;
+	min-height: 50px;
+	position: relative;
+	//border: 2px solid blue;
+}
+.lookingForDetailRowPostPre{
+	float: left;
+	width: 100%;
+	//border: 1px solid orange;
+}
+.lookingForDetailRow .inputContainer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-left: 59px;
+	padding-right: 0px;
+
+	width: 100%;
+	//border: 1px dashed red;
+}	
+.lookingForDetailRow .inputContainer input{
+	display: block;
+	font-size: 32px;
+	width: 100%;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.newRowIcon{
+	float: left;
+	//margin-left: 12px;
+	width: 50px;
+	height: 50px;
+	line-height: 52px;
+	text-align: center;
+	.border-radius(12px);
+	//border: 2px solid @grey2b;
+	font-size: 24px;
+	background-color: @grey2;
+	position: relative;
+	z-index: 1;
+	margin-bottom: 10px;
+	text-shadow: -1px -1px 0 rgba(220,220,220,0.5);
+
+	color: @grey4;
+}
+.newRowIcon:hover{
+	cursor: pointer;
+	color: @grey5;
+	//border-color: @grey4;
+}
+.mapDropdown{
+	position: absolute;
+	top: 54px;
+	right: 0px;
+	left: 0px;
+	min-height: 340px;
+	background-color: #fff;
+	border: 1px solid @grey2b;
+	z-index: 50001;
+	display: none;
+}
+.mapDropdownList{
+	position: absolute;
+	top: 54px;
+	right: 0px;
+	left: 0px;
+	min-height: 340px;
+	background-color: #fff;
+	border: 1px solid @grey2b;
+	z-index: 50001;
+	display: none;
+}
+.mapDropdownList ul{
+	list-style-type: none;
+	padding: 0px;
+}
+.mapDropdownList ul li{
+	font-size: 16px;
+	padding: 8px 60px 8px 12px;
+	position: relative;
+}
+.mapDropdownList ul li:nth-child(even){
+	background-color: @grey;
+}
+.mapDropdownList ul li:hover{
+	cursor: pointer;
+	background-color: @grey2;
+}
+.mapDropdownListIcon{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 6px 12px;
+	font-size: 22px;
+}
+.mapDropdownListIcon:hover{
+	color: @red;
+	cursor: pointer;
+}
+.mapDropdownInfo{
+	width: 44px;
+	height: 44px;
+	line-height: 42px;
+	text-align: center;
+	position: absolute;
+	top: 66px;
+	right: 12px;
+	border: 2px solid #fff;
+	z-index: 50002;
+	display: none;
+	color: #fff;
+	.border-radius(3px);
+	font-size: 22px;
+	background-color: @red;
+}
+.mapDropdownInfo:hover{
+	cursor: pointer;
+	opacity: 0.8;
+}
+.mapError{
+	width: 100%;
+	position: absolute;
+	top: 340px;
+	left: 0;
+	padding: 6px 12px;
+	color: #fff;
+	z-index: 50002;
+	background-color: @red;
+	font-size: 14px;
+	display: none;
+	text-align: center;
+}
+
+
+
+.mapInfoTitle{
+	font-weight: bold;
+	max-width: 100%;
+	overflow: hidden;
+	float: left;
+}
+.mapInfoSelect{
+	padding: 3px 6px;
+	color: #fff;
+	text-transform: uppercase;
+	background-color: @lawnGreen;
+	float: left;
+	clear: both;
+	margin-top: 6px;
+}
+.mapInfoSelect:hover{
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+
+.searchingMap{
+	position: absolute;
+	top: 0px;
+	right: 12px;
+	display: none;
+	
+	font-size: 24px;
+	color: @grey3;
+	.fa{
+		display: block;
+		line-height: 50px;
+	}
+}
+.collectionTag{
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	float: left;
+	.close{
+		position: absolute;
+		right: 12px;
+		top: 3px;
+		display: block;
+		line-height: 50px;
+		margin-left: 12px;
+		font-size: 42px;
+	}
+	.close:hover{
+		cursor: pointer;
+		color: @grey5;
+	}
+}
+.collectionTag:last-child{
+	margin-bottom: 0px;
+}
+.collectionTag .collectionTagCenter{
+	background-color: @grey2;
+	padding: 0 48px 0 12px;
+	line-height: 50px;
+	float: left;
+	font-size: 24px;
+	margin-bottom: 10px;
+	margin-right: 6px;
+	.border-radius(9px);
+	font-size: 32px;
+	text-shadow: -1px -1px 0px rgba(220,220,220,0.5);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.lookingForDetailRow .deliveryTo .inputContainer{
+	padding-right: 0px;
+}
+
+.lookingForDetailRow .collectionAt .inputContainer{
+	position: absolute;
+}
+.lookingForDetailRow .collectionAt .inputContainer input{
+	float: left;
+}
+
+.extraCollection{
+	width: 100%;
+	max-width: 812px;
+	margin: 0 auto;
+	position: relative;
+	padding-left: 302px;
+	clear: both;
+	min-height: 56px;
+	//border: 1px dotted pink;
+}
+.extraCollection .inputContainer{
+	padding: 0;
+}
+.extraCollection input{
+	width: 100%;
+}
+.extraCollection .mapDropdown{
+	left: 0px;
+}
+
+.inputSpan{
+	display: block;
+}
+
+
+
+.collectionInputContainer{
+	float: right;
+	width: calc(~'100% - 58px');
+	//border: 1px solid red;
+	position: relative;
+}
+.collectionInputContainer input{
+	display: block;
+	width: 100%;
+	font-size: 32px;
+}
+
+
+
+
+.orCollection{
+	clear: both;
+	width: 812px;
+	margin: 12px auto 0px;
+
+	.searchPanelText{
+		float: left;
+		line-height: 54px;
+		color: @red;
+	}
+
+	input{
+		float: left;
+		font-size: 24px;
+		margin-left: 24px;
+	}
+}
+.fakeCollectionSelect{
+	float: left;
+	margin-left: 24px;
+	background-color: @grey2;
+	padding: 0px 12px;
+	margin-right: 24px;
+	//height: 50px;
+
+	.icons{
+		line-height: 50px;
+		font-size: 28px;
+		display: block;
+	}
+}
+
+.dropup{
+	.dropdown-menu{
+		bottom: 40px;
+	}	
+}

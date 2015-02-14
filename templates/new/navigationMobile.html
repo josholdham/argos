@@ -1,0 +1,54 @@
+<div class="navigationMobile mobileOnly">
+	<div class="nm_icon" ng-click="mobileMenuOpenToggle()">
+		<span class="fa fa-bars"></span>
+	</div>
+
+	<div class="nm_logo">
+		<img src="img/logo.png" alt="">
+	</div>
+
+	<div class="nm_icon nm_iconRight">
+		<div class="dropdown-toggle-basket dropdown-basket">
+			<span class="ico-Trolley"></span>
+			<div class="basketBadge" ng-show="basketItems.length > 0">
+				{{basketItems.length}}
+			</div>
+		</div>
+		<ul class="dropdown-menu basketDropdown" stopeventpropagation>
+			<span class="emptyBasketItems"  ng-show="basketItems.length === 0">
+				No items in basket
+			</span>
+
+			<li ng-repeat="basketItem in basketItems" class="group basketLi" ng-show="basketItems.length > 0">
+				<div class="basketInfo">
+					<div class="basketImage" style="background-image: url({{basketItem.images[0]}})">
+					</div>
+
+					<div class="basketTitle">
+						{{basketItem.title}}
+					</div>
+					<div class="basketRow">
+						{{basketItem.quantity}}  &times; {{basketItem.price}} 
+					</div>
+				</div>
+			</li>
+
+			<li class='group' ng-show="basketItems.length > 0">
+				<div class="subtotalRow">
+					Subtotal: <span>£69.99</span>
+				</div>
+				<div class="basketButtonRow">
+					<div class="btnArgos btnLawnGreen" ng-click="goToCheckout()">
+						Checkout
+					</div>
+					<div class="btnArgos btnPurple">
+						View Trolley
+					</div>
+				</div>
+			</li>
+		</ul>	
+	</div>
+	<div class="nm_icon nm_iconRight" ng-click="searchIconClick()">
+		<span class="ico-Search"></span>
+	</div>
+</div>

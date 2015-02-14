@@ -1,0 +1,32 @@
+<div class="stickyNavs stickyNavsPDP">
+	<div navigation-sticky></div>
+</div>
+
+<div class="orderContainer group">
+	<img src="img/order1.png" alt="">
+	<div class="orderBar group">
+		<div class="orderBarInner group">
+			<span class="icons ico-Delivery"></span> 
+			<div class="orderBarInnerText">Delivery</div> 
+		</div>
+	</div>
+
+	<img src="img/order2.png" alt="">
+
+	<div class="orderBar orderBarTotals group">
+		<div class="orderBarContinue" ng-show="!showPayment" ng-click="showPayment = true"></div>
+		<img src="img/order3b.png" alt="" ng-show="!showPayment" class="">
+		<img src="img/order3.png" alt="" ng-show="showPayment" class="">
+	</div>
+	
+	<div class="orderPayment" ng-show="showPayment">
+		<div class="orderPaymentClose" ng-click="showPayment = false"></div>
+		<div class="orderPaymentConfirmButton" ng-click="paymentConfirmed = true"></div>
+		<img class="orderPaymentDetails" src="img/order4.png" alt="">
+	</div>
+
+	<div class="orderPayment" ng-show="paymentConfirmed">
+		<img class="orderPaymentConfirm" src="img/paymentConfirm.png" alt="">
+	</div>
+</div>
+

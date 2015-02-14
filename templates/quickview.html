@@ -1,0 +1,210 @@
+<div class=' qvArrow {{page.openTileDirection}}' style='left: {{(page.arrowPos * unit) - 26}}px' ng-if="page.hasOpen">
+	<div class='qvArrowInner {{page.openTileDirection}}' ng-if="page.hasOpen"></div>
+</div>
+
+<div class="closeQuickView" ng-click="closeQuickView($index)" stopeventpropagation>
+	&times;
+</div>
+
+<div class="qvInfo" style="height: {{page.qvHeight}}px">
+	<div class="qvInfoInner" id="qvInfoInner{{$index}}">
+		<div class="row qvRow"  id="qvInfo{{$index}}">
+			<div class="col-lg-2 col-md-3 col-sm-3 col-xs-3 qvLeft group"  style="min-height: {{page.qvHeight}}px">
+
+				<div class="qvIconsTop group">
+					<div class="qvIcon">
+						<span class="indIcon ico-ValentinesDay"></span>
+					</div>
+					<div class="qvIcon">
+						<span class="fa fa-plus"></span>
+					</div>
+				</div>
+
+				<div class="qvHeader">
+					See more like this
+				</div>
+				<div class="qvFilters group">
+
+					<div ng-if="page.items[page.itemIndex].seeMore.length > 0">
+						<div class="qvFilter" ng-repeat="seeMore in page.items[page.itemIndex].seeMore | limitTo: 4" ng-click="searchRouter({'filtersArray': [seeMore], 'blocks': 2,'currentBlockCount': 0, 'clickedFilter': true})" ng-if="!$first">
+							{{seeMore}}
+						</div>
+					</div>
+					<div ng-if="!page.items[page.itemIndex] || page.items[page.itemIndex].seeMore.length <= 0">
+						<div class="qvFilter">
+							Colour - Orange
+						</div>
+						<div class="qvFilter">
+							Size - Large
+						</div>
+						<div class="qvFilter">
+							Brand - Argos
+						</div>
+					</div>
+				</div>
+				<div class="qvIcons">
+					<div class="qvIcon">
+						<span class="indIcon ico-ValentinesDay"></span>
+					</div>
+					<div class="qvIcon">
+						<span class="fa fa-plus"></span>
+					</div>
+				</div>
+
+				<div class="qvDelCol row group">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"  ng-click="collectionOverlay=true">
+						<div class="qvDelColHeader">
+							<span class="icons ico-ApplyInStore"></span>
+						</div>
+						<div class="qvDelColBody">
+							London Victoria
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="qvDelColHeader">
+							<span class="icons ico-Delivery"></span>
+						</div>
+						<div class="qvDelColBody">
+							SW1V 1EJ
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 group qvCentre"  style="min-height: {{page.qvHeight}}px">
+				<div class="row group">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div class="qvMainImageContainer" style="background-image: url('{{page.items[page.itemIndex].images[0]}}')">
+						</div>
+						<div class="qvThumbnails row group">
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 qvThumbnail" ng-if="!$first" ng-repeat="thumbnail in page.items[page.itemIndex].images ">
+								<div class="qvThumbnailItem" style="background-image: url('{{thumbnail}}')"></div>
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 qvThumbnail"  ng-if="!page.items[page.itemIndex] || page.items[page.itemIndex].images.length <= 4">
+								<div class="qvThumbnailItemEmpty">
+								</div>
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 qvThumbnail"  ng-if="!page.items[page.itemIndex] || page.items[page.itemIndex].images.length <= 3">
+								<div class="qvThumbnailItemEmpty">
+								</div>
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 qvThumbnail"  ng-if="!page.items[page.itemIndex] || page.items[page.itemIndex].images.length <= 2">
+								<div class="qvThumbnailItemEmpty">
+								</div>
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 qvThumbnail"  ng-if="!page.items[page.itemIndex] || page.items[page.itemIndex].images.length <= 1">
+								<div class="qvThumbnailItemEmpty">
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+						<div class="qvHeader">
+							{{page.items[page.itemIndex].title}}
+						</div>
+						<div class="qvPrice">
+							{{page.items[page.itemIndex].price}}
+						</div>
+						<div class="pdpRating">
+							<div class="fa fa-star star"></div>
+							<div class="fa fa-star star"></div>
+							<div class="fa fa-star star"></div>
+							<div class="fa fa-star star"></div>
+							<div class="fa fa-star-o star"></div>
+							<div class="pdpRatingText">
+								(11)
+							</div>
+						</div>
+						<div class="qvText">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos pariatur, dolor veniam debitis incidunt explicabo molestias nam maxime! Facere fugit ipsa beatae necessitatibus possimus quidem vero voluptatum minus expedita vitae!
+						</div>
+						<div class="qvMoreDetails" ng-click="openPDP(page.openTile, true, true)">
+							More Details
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-2  col-md-2 col-sm-3 col-xs-3 qvRight">
+				<div class="qvAction qvActionCollect" style="min-height: {{(page.qvHeight / 2) - 3}}px" ng-click="page.items[page.itemIndex].collectionOverlay=true">
+					<div class="qvActionContent">
+						<div class="qvActionButton">
+							<span class="icons ico-ApplyInStore"></span>
+							Collect Now
+						</div>
+					</div>
+				</div>
+				<div class="qvAction" style="min-height: {{(page.qvHeight / 2)}}px">
+					<div class="qvActionContent">
+						<div class="qvActionButton">
+							<span class="icons ico-Delivery"></span> 
+							Deliver To Me
+						</div>
+						<div class="qvDeliveryText" ng-if="deliveryText">
+							{{deliveryText}}
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row qvOverlay"  id="qvInfo{{$index}}" ng-class="{'qvOverlayLeft' : page.items[page.itemIndex].collectionOverlay}">
+
+			<div class="col-lg-10 col-lg-offset-2 col-md-9 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12 col-xs-offset-0 qvOverlayContent group"  style="min-height: {{page.qvHeight}}px">
+				<div class="qvOverlayClose" ng-click="page.items[page.itemIndex].collectionOverlay=false">
+					<span class="fa fa-chevron-right"></span>
+				</div>
+
+				<div class="qvOverlayContentMain" ng-show="!page.items[page.itemIndex].reserved" style="min-height: {{page.qvHeight}}px">
+					<div class="qvHeader">
+						Your Details
+					</div>
+
+					<div class="qvForm form-group">
+					    <label for="exampleInputEmail1">Email address</label>
+					    <input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+					  </div>
+					  <div class="qvForm form-group">
+					    <label for="exampleInputPassword1">Phone Number</label>
+					    <input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+					  </div>
+					  
+					  <div class="checkbox">
+					    <label>
+					      <input type="checkbox"> Sign up to newsletter
+					    </label>
+					  </div>
+					  <div class="qvReserve" ng-click="page.items[page.itemIndex].reserved = true">Reserve</div>
+				</div>
+
+				<div class="qvOverlayContentMain" ng-show="page.items[page.itemIndex].reserved" style="min-height: {{page.qvHeight}}px">
+					<div class="qvHeader">
+						Thank you, your reservation is now complete
+					</div>
+					<div class="qvSubheader">
+						Reservation no. 123456
+					</div>
+
+					<div class="qvReservationPanel">
+						<span class="icons ico-ApplyInStore"></span> London Victoria, available to collect in 90 minutes
+					</div>
+
+					<div class="qvPaymentPanel group">
+						<div class="qvSubheader">
+							Would you like to pay for your item now?
+						</div>
+
+						<div class="qvReserve">Pay Now</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

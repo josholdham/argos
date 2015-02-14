@@ -1,0 +1,147 @@
+<div class="listItemImageContainer nonMobile" style="background-image: url({{item.images[0]}}); height: {{listImageHeight}}px">
+</div>
+
+<div class="listItemImageContainer mobileOnly" style="background-image: url({{item.images[0]}});">
+</div>
+
+<div class="listItemRow">
+	<div class="row listItemRowInner">
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+			<div class="qvHeader">
+				{{item.title}}
+			</div>
+
+			<div class="row listItemInfo nonMobile">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="qvText">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos tempora non incidunt id! Quisquam aliquid illo et soluta, similique itaque sunt. Nisi repellendus debitis officiis, incidunt recusandae voluptates odit beatae! 
+					</div>
+					<span class="moreDetails" ng-click="openPDP(item, true)">More Details</span>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="pdpRating">
+						<div class="fa fa-star star"></div>
+						<div class="fa fa-star star"></div>
+						<div class="fa fa-star star"></div>
+						<div class="fa fa-star star"></div>
+						<div class="fa fa-star-o star"></div>
+						<div class="pdpRatingText">
+							(11)
+						</div>
+					</div>
+					<div class="qvPrice">
+						{{item.price}}
+					</div>
+					<div class="listItemCompetitor group">
+						<span class="left">John Lewis</span>
+						<span class="right">£50k</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="listItemInfo mobileOnly group">
+				<div class="qvPrice">
+					{{item.price}}
+				</div>
+				<div class="pdpRating group">
+					<div class="fa fa-star star"></div>
+					<div class="fa fa-star star"></div>
+					<div class="fa fa-star star"></div>
+					<div class="fa fa-star star"></div>
+					<div class="fa fa-star-o star"></div>
+					<div class="pdpRatingText">
+						(11)
+					</div>
+				</div>
+
+				<div class="mobileOnly listActionsRowMobile">
+					<div class="buttonGrey"  ng-click="openPDP(item, true)">
+						More Details
+					</div>
+					<div class="buttonGreen" ng-click="listCollect(item, 'details')">
+						Get It To Me
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-lg-offset-1 col-md-4 col-sm-4 col-xs-12 nonMobile">
+			<div class="listItemAction" style="margin-top: {{(listHeight - 112) / 2}}px" ng-click="listCollect(item, 'details')">
+				<span class="ico ico-ApplyInStore"></span>
+				Collect Now
+			</div>
+			<div class="listItemAction"  ng-click="listCollect(item, 'payment')">
+				<span class="ico ico-Delivery"></span> 
+				Deliver To Me
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row qvOverlay"  id="qvInfo{{$index}}" ng-class="{'qvOverlayLeft' : item.collectionOverlay}">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 qvOverlayContent group">
+		<div class="qvOverlayClose" ng-click="listCollect(item)">
+			<span class="fa fa-chevron-right"></span>
+		</div>
+
+		<div class="qvOverlayContentMain" ng-show="item.details">
+			<div class="qvHeader">
+				Your Details
+			</div>
+
+			<div class="qvForm form-group">
+			    <label for="exampleInputEmail1">Email address</label>
+			    <input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+			  </div>
+			  <div class="qvForm form-group">
+			    <label for="exampleInputPassword1">Phone Number</label>
+			    <input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+			  </div>
+			  
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox"> Sign up to newsletter
+			    </label>
+			  </div>
+			  <div class="qvReserve" ng-click="listCollect(item, 'reserved')">Reserve</div>
+		</div>
+
+		<div class="qvOverlayContentMain" ng-show="item.reserved && !item.payment">
+			<div class="qvHeader">
+				Thank you, your reservation is now complete
+			</div>
+			<div class="qvSubheader qvSubheaderRes">
+				Reservation no. 123456
+			</div>
+
+			<div class="qvReservationPanel">
+				<span class="icons ico-ApplyInStore"></span> Milton Keynes, available to collect in 90 minutes
+			</div>
+
+			<div class="qvPaymentPanel group">
+				<div class="qvSubheader">
+					Would you like to pay for your item now?
+				</div>
+
+				<div class="qvReserve" ng-click="listCollect(item, 'payment')">Pay Now</div>
+			</div>
+		</div>
+
+		<div class="qvOverlayContentMain" ng-show="item.payment">
+			<div class="qvHeader">
+				Payment Method
+			</div>
+			<div class="qvSubheader2">
+				Choose how you would like to pay.
+			</div>
+			<div class="productInfoBoxResCardDetails">
+				<img src="img/payment.png" alt="">
+			</div>
+
+			<div class="qvPaymentPanel qvPaymentPanelPayment group">
+				<div class="qvReserve" ng-click="listCollect(item)">Continue</div>
+			</div>
+		</div>
+	</div>
+</div>

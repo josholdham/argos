@@ -1,0 +1,201 @@
+<div class="gridContainer" ng-repeat="page in items" style="height: {{(page.rows * (unit * heightRatio)) + page.filterAdjusted + page.adjusted}}px;" ng-if="viewType !== 'list'">
+<!-- HOME HEADERS -->
+	<span home-headers></span>
+
+	<div class="gridInner group"  id="gridInner{{$index}}" data-grid-index="{{$index}}" grid>
+<!-- TILES -->
+		<div class="tile group {{item.type}}" 
+			ng-repeat="item in page.items track by $index" 
+			style="width: {{item.grid.xSize * unit}}px; height: {{item.grid.ySize * (unit * heightRatio)}}px; top: {{(item.grid.yPos * (unit * heightRatio))  + item.adjusted + page.filterAdjusted}}px; left: {{item.grid.xPos * unit}}px" 
+			data-index="{{$index}}" 
+			data-parent-index="{{$parent.$index}}"
+			data-direction="{{item.grid.direction}}"
+			data-y-pos="{{item.grid.yPos}}"
+			data-y-size="{{item.grid.ySize}}"
+			data-x-pos="{{item.grid.xPos}}"
+			data-x-size="{{item.grid.xSize}}"
+			data-product-id = "{{item.id}}"
+			ng-class="{'tileActive': item.tileActive}" 
+			id="tile_{{$index}}" 
+			item="{}">
+
+<!-- Regular grid -->
+			<div class="tileInner group" 
+				ng-class="{'tileInnerProductBig' : settings.expand === 'big', 
+				'tileInnerProduct' : settings.expand === 'standard', 
+				'tileLarge' : (item.grid.xSize === 2 && item.grid.ySize === 2), 
+				'tileInnerProductActive': (item.tileActive && settings.expand === 'standard'), 
+				'tileQuickviewMode': (item.tileActive && settings.expand === 'big' && !(item.grid.xSize === 2 && item.grid.ySize === 2))}" 
+				style="height: {{item.grid.ySize * (unit * heightRatio) - 18}}px;"
+				ng-if="(item.type==='product' || item.type==='specialProduct') && viewType !== 'bigger'" 
+				id="tileInner_{{item.id}}"  
+				ng-init="item.activeImage=0;" 
+				ng-click="openPDP(item, null, null, $event)"
+				ng-mouseenter="tileMouseEnter(item)" 
+				ng-mouseleave="tileMouseLeave(item)">
+
+				<div class="hiddenQV"  stopeventpropagation>
+					<span class="hiddenQVQV"  tile>
+						<span class="fa fa-eye"></span>
+						QUICK VIEW
+					</span>
+					<span class="hiddenQVDetail" ng-click="openPDP(item,true)">
+						DETAIL
+					</span>
+				</div>
+
+				<div class="productSticker" ng-if="item.home1Detail && (item.home1Detail === 'new' || item.home1Detail === 'hot')" once-text="item.home1Detail" once-class="{'hot' : item.home1Detail === 'hot' }">
+				</div>
+
+				<div class="productSplash" style="background-image: url({{item.splashImage}})">
+				</div>
+
+				<div class="productImageContainer" style="height: {{(item.grid.ySize * (unit * heightRatio)) - 47}}px" ng-if="gridCols === 2 && ctrl === 'searchCtrl'">
+					<div class="productImageInner" style="background-image: url('{{item.images[item.activeImage]}}')">
+					</div>
+
+					<div class="productImageThumbnails">
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+					</div>
+				</div>
+
+				<div class="productImageContainer" style="height: {{(item.grid.ySize * (unit * heightRatio)) - 70}}px" ng-if="gridCols === 5 || (gridCols === 2 && ctrl === 'pdpCtrl')">
+					<div class="productImageInner" style="background-image: url('{{item.images[item.activeImage]}}')">
+					</div>
+
+					<div class="productImageThumbnails">
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+					</div>
+				</div>
+
+				<div class="productImageContainer" style="height: {{(item.grid.ySize * (unit * heightRatio)) - 70}}px" ng-if="gridCols === 3">
+					<div class="productImageInner" style="background-image: url('{{item.images[item.activeImage]}}')">
+					</div>
+
+					<div class="productImageThumbnails">
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+					</div>
+				</div>
+
+				<div class="productImagePips" stopeventpropagation ng-if="settings.pips">
+					<span class="fa fa-circle" ng-repeat="pip in item.images" ng-init="item.pips = ['active']" ng-class="{'fa-circle-thin': !item.pips[$index]}" ng-mouseenter="pipsHover(item, $index)" ng-mouseleave="pipsLeave(item, $index)" ng-click="pipsClick(item, $index)">
+					</span>
+				</div>
+
+				<div class="productImagePips" stopeventpropagation ng-if="!settings.pips">
+					<span class="fa fa-circle-thin"></span>
+					<span class="fa fa-circle grey"></span>
+					<span class="fa fa-circle navy"></span>
+				</div>
+
+				<div class="productInfoBox" ng-class="{'productInfoBoxWithNumber' : item.bestSeller}">
+					<div class="productInfoBoxNumber" ng-if="item.bestSeller" once-text="item.bestSeller"></div>
+
+					<div class="productInfoBoxTitle" once-text="item.title" ng-class="{'productInfoBoxTitleShow' : settings.textExpands}">
+					</div>
+					
+					<div class="productInfoBoxInfo">
+						<span class="productInfoBoxInfoPrice" once-text="item.price">
+
+						</span>
+						<span class="productInfoBoxInfoPriceWas" ng-show="gridCols !==2" once-if="item.was" once-text="item.was">
+
+						</span>
+						<span class="productInfoBoxInfoStars" ng-if="!item.bestSeller">
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star"></span>
+							<span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span>
+						</span>
+					</div>
+				</div>
+
+<!-- The Quickview we see on hover-->
+				<span expanded-quickview></span>
+			</div>
+
+<!-- 10 cols grid -->
+			<div class="tileInner tileInner10Grid group" 
+				ng-class="{'tileInnerProductBig' : settings.expand === 'big', 
+				'tileInnerProduct' : settings.expand === 'standard', 
+				'tileLarge' : (item.grid.xSize === 2 && item.grid.ySize === 2), 
+				'tileInnerProductActive': (item.tileActive && settings.expand === 'standard'), 
+				'tileQuickviewMode': (item.tileActive && settings.expand === 'big' && !(item.grid.xSize === 2 && item.grid.ySize === 2))}"
+				ng-if="(item.type==='product' || item.type==='specialProduct') && viewType === 'bigger'" 
+				id="tileInner_{{item.id}}" 
+				ng-click="openPDP(item)" 
+				ng-init="item.activeImage=0;" 
+				ng-mouseenter="tileMouseEnter(item)" 
+				ng-mouseleave="tileMouseLeave(item)">
+
+				<div class="productImageContainer" style="height: {{(item.grid.ySize * (unit * heightRatio)) - 18}}px">
+					<div class="productImageInner" style="background-image: url('{{item.images[item.activeImage]}}')">
+					</div>
+					<div class="productImageThumbnails">
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+						<div class="productImageThumbnail"></div>
+					</div>
+				</div>
+
+<!-- The Quickview we see on hover-->
+				<span expanded-quickview></span>
+			</div>
+
+
+
+			<div class="tileInner promo group" once-if="item.type==='promo'">
+				<div class="promoInner" once-class="item.colour" once-if="item.layout === 5">
+					{{item.line1}}
+				</div>
+				<div class="promoInner promoImage" 
+					ng-style="{'background-image': 'url('+item.image+')'}"
+					ng-class="item.colour" 
+					once-if="item.layout === 'image' && item.imageSize !== 'full'">			
+				</div>
+
+				<div class="promoInner promoImage promoImageFull" 
+					ng-style="{'background-image': 'url('+item.image+')'}"
+					ng-class="item.colour" 
+					once-if="item.layout === 'image' && item.imageSize === 'full'">			
+				</div>
+
+
+				<div class="promoInner"  once-class="item.colour" once-if="item.layout === 4 || item.layout === 2">
+					<span class="promo1Icon {{item.icon}} whiteText"></span>
+					<span class="promo4Line1 whiteText">{{item.line1}}</span>
+					<span class="promo4Line2 whiteText">{{item.line2}}</span>
+				</div>
+			</div>
+
+			<div class="tileInner promo group" once-class="item.colour" once-if="item.type==='promoTall' ">
+				<div class="promoInner">
+					<span>{{item.name}}</span>
+				</div>
+			</div>
+
+			<div class="tileInner specialLarge group" style="background-image: url('{{item.image}}')" once-if="item.type==='specialLarge'">
+			</div>
+		</div>
+
+<!-- Quick view that opens within the tabs -->
+		<div 
+			class='quickView quickViewGrid'  
+			id="quickView{{$index}}" 
+			style='top: {{page.rowStart * (unit * heightRatio) + page.filterAdjusted}}px; height: {{(page.qvHeight + 2)}}px'  
+			data-tile-id='{{page.openTile}}' 
+			data-direction='{{page.openTileDirection}}' 
+			ng-class="{'quickViewOpen' : page.hasOpen}" 
+			data-row-start="{{rowStart}}" 
+			quickview
+		>
+		</div>	
+	</div>
+</div> <!-- tiles -->

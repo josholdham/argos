@@ -1,0 +1,31 @@
+<div class="xRichCircle" ng-repeat = "button in buttons | filter : {type: pdpbuttons}" style="top: {{button.top}}; left: {{button.left}};" ng-click="buttonClick(button)">
+	<span class="ico ico-plus"></span>
+</div>
+
+
+<div class="xRichModalCover" ng-show="xRichModal" ng-click="xRichModal = false"></div>
+<div class="xRichModal" ng-show="xRichModal" >
+	<div class="xRichModalClose" ng-click="xRichModal = false">
+		&times;
+	</div>
+	<div class="xLeftTitle xRichModalTitle">
+		{{popup.title}}
+	</div>
+	<div class="xLeftParagraph">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse similique optio ut odio cum quas illo deserunt neque unde, vitae culpa iure quis consequatur sit laboriosam.
+	</div>
+	<div class="xLeftPrice">
+		{{popup.price}}
+	</div>
+	<div class="xLeftGetButton" ng-click="addClick()">
+		Add
+	</div>
+	<div class="xLeftGetButton xMoreDetailsButton" ng-click="goToPDP()">
+		More Details
+	</div>
+</div>
+
+<div class="rich360">
+	<span class="ico ico-icn"></span>
+	<span class="rich360Text">360</span>
+</div>

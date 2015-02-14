@@ -1,0 +1,199 @@
+<!-- THIS IS FOR THE DIFFERENT TIMELINE MARKERS -->
+
+<div class="timelineMarker timelineMarker2" ng-class="{'timelineMarkerCircle': beta.timeline === 'stickyMarkersCircle', 'timelineMarkerSticky3': beta.timeline === 'stickyMarkers3', 'timelineMarker2Wider': beta.timeline !== 'stickyMarkers3' && multipleDeliveryOptions === 'both'}" ng-show="showTimeline && (beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3' || beta.timeline === 'stickyMarkersCircle') && ctrl !== 'pdpCtrl'">
+	<div class="timelineMarker2Container">
+		
+		<span class="ico ico-Delivery" ng-hide="beta.timeline === 'stickyMarkers3' || multipleDeliveryOptions === 'collection'"></span>
+		<span class="ico ico-ApplyInStore" ng-hide="beta.timeline === 'stickyMarkers3' || multipleDeliveryOptions === 'delivery'"></span>
+
+
+		<div class="timelineMarkerCurve" ng-show="beta.timeline === 'stickyMarkers3'">
+			<span class="ico ico-Delivery"></span>
+		</div>
+
+		<div class="timelineMarkerCircleInner" ng-show="beta.timeline === 'stickyMarkersCircle'"></div>
+
+		<div class="timelineMarker2Inner">
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3'">
+
+					<span class="timelineMarker2TextMiddle">
+						Now
+					</span>
+				</span>
+
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle'">
+					<span class="timelineMarker2TextTop">
+						Available
+					</span>
+					<span class="timelineMarker2TextBottom">
+						NOW!
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<!-- <span class="ico ico-Delivery"></span> -->
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3'">
+					<span class="timelineMarker2TextTop">
+						8.00 PM
+					</span>
+					<span class="timelineMarker2TextBottom">
+						Today
+					</span>
+				</span>
+
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						4 hours
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<!-- <span class="ico ico-Delivery"></span> -->
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3'">
+					<span class="timelineMarker2TextMiddle">
+						Tomorrow
+					</span>
+				</span>
+
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						1 days
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3'">
+					<span class="timelineMarker2TextMiddle">
+						In 2 days
+					</span>
+				</span>
+
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						2 days
+					</span>
+				</span>
+			</div>
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkers2' || beta.timeline === 'stickyMarkers3'">
+					<span class="timelineMarker2TextMiddle">
+						In 4 days
+					</span>
+				</span>
+
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						4 days
+					</span>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="timelineMarkerTriangle" ng-show="beta.timeline === 'stickyMarkers2'"></div>
+</div>
+
+<!-- THE TIMELINE MARKER THAT IS A STATIONARY BLACK, SEMI-TRANSPARENT CIRCLE -->
+
+<div class="timelineMarker timelineMarker2 timelineMarkerCircle timelineMarkerCircle2" ng-if="showTimeline && beta.timeline === 'stickyMarkersCircle2'">
+	<div class="timelineMarker2Container">
+		<div class="timelineMarker2Inner">
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle2'">
+					<span class="timelineMarker2TextTop">
+						Available
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							in
+						</timelineText>
+					</span>
+					<span class="timelineMarker2TextBottom">
+						<timelineText ng-if="deliveryOptions[0].showType === 'collection'">
+							NOW!
+						</timelineText>
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							4 hours
+						</timelineText>
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle2'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						<timelineText ng-if="deliveryOptions[0].showType === 'collection'">
+							4 hours
+						</timelineText>
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							1 day
+						</timelineText>
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle2'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						<timelineText ng-if="deliveryOptions[0].showType === 'collection'">
+							1 day
+						</timelineText>
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							2 days
+						</timelineText>
+					</span>
+				</span>
+			</div>
+
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle2'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						<timelineText ng-if="deliveryOptions[0].showType === 'collection'">
+							2 days
+						</timelineText>
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							4 days
+						</timelineText>
+					</span>
+				</span>
+			</div>
+			<div class="timelineMarker2InnerInner">
+				<span class="timelineMarker2Text" ng-if="beta.timeline === 'stickyMarkersCircle2'">
+					<span class="timelineMarker2TextTop">
+						Available in
+					</span>
+					<span class="timelineMarker2TextBottom">
+						<timelineText ng-if="deliveryOptions[0].showType === 'collection'">
+							4 days
+						</timelineText>
+						<timelineText ng-if="deliveryOptions[0].showType === 'delivery'">
+							1 week
+						</timelineText>
+					</span>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

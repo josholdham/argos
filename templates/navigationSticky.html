@@ -1,0 +1,131 @@
+<div class="navigationSticky nonMobile">
+	<span class="nonMobile">
+		<a class="navigationStickyLogo" href="#/">
+			<img src="img/logo.png" alt="">
+		</a>
+
+		<div class="navigationIcons">
+			<div class="navigationIcon" ng-click="searchIconClick()">
+				<span class="ico-Search"></span>
+			</div>
+			<div class="navigationIcon">
+				<span class="ico-Account"></span>
+			</div>
+			<div class="navigationIcon">
+				<span class="ico-ValentinesDay"></span>
+			</div>
+			<div class="navigationIcon dropdown">
+				<div class="dropdown-toggle-basket dropdown-basket">
+					<span class="ico-Trolley"></span>
+
+					<div class="basketBadge" ng-show="basketItems.length > 0">
+						{{basketItems.length}}
+					</div>
+				</div>
+				<ul class="dropdown-menu basketDropdown">
+					<span class="emptyBasketItems"  ng-show="basketItems.length === 0">
+						No items in basket
+					</span>
+
+					<div class="basketDropdownInner group" ng-show="basketItems.length > 0 && !justAdded">
+						<div ng-repeat="basketItem in basketItems" class="group basketLi">
+							<div class="basketInfo">
+								<div class="basketImage" style="background-image: url({{basketItem.images[0]}})">
+								</div>
+
+								<div class="basketTitle">
+									{{basketItem.title}}
+								</div>
+								<div class="basketRow">
+									{{basketItem.price}} 
+									<span class="basketQuantity">
+										Qty:
+									</span>
+									<span class="basketQuantityNumber">
+										{{basketItem.quantity}} 
+									</span>
+									<!-- {{basketItem.quantity}}  &times;  -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="basketDropdownInner basketDropdownInnerAdded group" ng-show="basketItems.length > 0 && justAdded">
+						<div class="addedToBagRow">
+							<span class="ico ico-Tick lawnGreenText"></span> Added To Bag
+						</div>
+
+						<div ng-repeat="basketItem in basketItems" class="group basketLi">
+							<div class="basketInfo">
+								<div class="basketImage" style="background-image: url({{basketItem.images[0]}})">
+								</div>
+
+								<div class="basketTitle">
+									{{basketItem.title}}
+								</div>
+								<div class="basketRow">
+									{{basketItem.price}} 
+									<span class="basketQuantity">
+										Qty:
+									</span>
+									<span class="basketQuantityNumber">
+										{{basketItem.quantity}} 
+									</span>
+									<!-- {{basketItem.quantity}}  &times;  -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="basketDropdownInnerAddedSub" ng-show="basketItems.length > 0 && justAdded">
+						<div class="addedToBagRow">
+							Subtotal: <span class="lawnGreenText">£69.99</span>
+						</div>
+						<div class="basketFreeDelivery">
+							Your order qualifies for free delivery
+						</div>
+						<div class="btnArgos btnPurple" ng-click="justAdded = false">
+							View Bag
+						</div>
+						<div class="btnArgos btnLawnGreen" ng-click="goToCheckout()">
+							Checkout
+						</div>
+					</div>
+
+					<div class='group' ng-show="basketItems.length > 0 && !justAdded">
+						<div class="basketButtonRow">
+							<div class="btnArgos btnLawnGreen" ng-click="goToCheckout()">
+								Checkout
+							</div>
+						</div>
+					</div>
+				</ul>	
+			</div>
+		</div>
+
+		<div class="navigationBrowse dropdown">
+			<div class="dropdown-header dropdown-toggle dropdown-categories">
+				<div class="byCategory">
+					<span class="bold">Browse</span>  
+					<span class="byCategoryText">By Category</span>
+				</div>
+				<span class="ico-DropDown ico navigationBrowseIco"></span>
+			</div>
+
+			<div class="dropdown-menu categoryContainer" role="menu" aria-labelledby="deliveryOrCollection" stopeventpropagation>
+				<div class="categoryItem categoryItemActive" ng-if="categoryLevel > 1" ng-click="categoryClick('1', '1')">
+					All Categories
+				</div>
+
+				<div class="categoryItem categoryItemHeader" ng-if="categoryLevel > 1" ng-repeat="parent in activeParentCategories" ng-click="categoryClick(parent.parentId, ($index+1))">
+					{{parent.title}}
+				</div>
+				
+				<div class="categoryItem" ng-click="categoryClick(item.id,null,item.title)" ng-repeat="item in categories[categoryLevel][categoryChild]">
+					{{item.title}}
+				</div>
+			</div>
+		</div>
+	</span>
+</div>
+

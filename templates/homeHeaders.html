@@ -1,0 +1,40 @@
+<!-- This are the home headings that work on the grouped headers beta option -->
+<div class="homeHeaders group" ng-if="page.filterHeading && page.filterHeading === 'home2'">
+	<span class="homeHeader turquoiseBG" ng-class="{'selected': home2Filter === 'bestSeller'}" ng-click="homeHeaderClick('bestSeller')">
+		Top Sellers
+	</span>
+	<span class="homeHeader purpleBG" ng-class="{'selected': home2Filter === 'clearance'}" ng-click="homeHeaderClick('clearance')">
+		Clearance
+	</span>
+	<span class="homeHeader redBG" ng-class="{'selected': home2Filter === 'priceCuts'}" ng-click="homeHeaderClick('priceCuts')">
+		Price Cuts
+	</span>
+	<span class="homeHeader orangeBG" ng-class="{'selected': home2Filter === 'looking'}" ng-click="homeHeaderClick('looking')">
+		What Others are looking at
+	</span>
+	<span class="homeHeader limeGreenBG" ng-class="{'selected': home2Filter === 'new'}" ng-click="homeHeaderClick('new')">
+		New Arrivals
+	</span>
+</div>
+
+<!-- This are the home headings that work on the separate headers beta option -->
+<div class="homeHeaders homeHeaders2 group" ng-if="page.filterHeading && page.filterHeading === 'home3_1'">
+	<span class="homeHeader turquoiseBG">
+		Top Sellers
+	</span>
+</div>
+<div class="homeHeaders homeHeaders2 group" ng-if="page.filterHeading && page.filterHeading === 'home3_2'">
+	<span class="homeHeader purpleBG">
+		What's Hot Now
+	</span>
+</div>
+<div class="homeHeaders homeHeaders2 group" ng-if="page.filterHeading && page.filterHeading === 'home3_3'">
+	<span class="homeHeader orangeBG">
+		What Others are looking at
+	</span>
+</div>
+<div class="homeHeaders homeHeaders2 group" ng-if="page.filterHeading && page.filterHeading === 'home3_4'">
+	<span class="homeHeader limeGreenBG">
+		New Arrivals
+	</span>
+</div>

@@ -1,0 +1,9 @@
+<div class="sr_container_list" ng-if="viewType === 'list'">
+	<div ng-repeat="item in searchResults" class="listItem group" ng-if="item.type === 'product' || item.type==='specialProduct'" style="min-height: {{listHeight}}px" list-item>
+		
+	</div>
+
+	<!-- <div ng-repeat="item in searchResults" class="listItem group mobileOnly" ng-if="item.type === 'product' || item.type==='specialProduct'" list-item>
+		
+	</div> -->
+</div>

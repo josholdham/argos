@@ -1,0 +1,193 @@
+<!-- QUICKVIEW WITHIN GRID -->
+	<div class="qvn_close" ng-click="closeOpenQuickview()">
+		&times;
+	</div>
+
+	<span>
+		<div class="qvn_left group nonMobile">
+			<div class="qvn_title">
+				See More Like This
+			</div>
+			<div class="qvn_tags group">
+				<div class="qvn_tag" ng-repeat="tag in quickviewItem.seeMore | limitTo: 4" ng-class="{'qvn_tagActive': filters.indexOf(tag.toLowerCase()) > -1}" ng-click="searchRouter({'seeMoreClick': tag, 'fromQV': true})">
+					{{tag}}
+				</div>
+			</div>
+			<div class="qvnActions">
+				<span class="ico ico-ValentinesDay"></span>
+				<span class="ico fa fa-plus"></span>
+			</div>
+		</div>
+		<div class="qvn_imageCol group" ng-click="openPDPClick(quickviewItem)">
+			<div class="sr_imageContainer">
+				<div class="sr_image" style="background-image: url({{quickviewItem.images[0]}})">
+				</div>
+			</div>
+			<div class="sr_qvOverlayThumbnails group nonMobile">
+				<div class="sr_qvOverlayThumbnail"></div>
+				<div class="sr_qvOverlayThumbnail"></div>
+				<div class="sr_qvOverlayThumbnail"></div>
+			</div>
+		</div>
+		<div class="qvn_center group">
+			<div class="qvn_title" ng-click="openPDPClick(quickviewItem)">
+				{{quickviewItem.title}}
+			</div>
+
+			<div class="qvn_price">
+				{{quickviewItem.price}}
+			</div>
+			<div class="qvn_was" ng-if="quickviewItem.was">
+				{{quickviewItem.was}}
+			</div>
+
+			<div class="qvn_stars">
+				<span class="fa fa-star" ng-repeat="dummyStar in maxStars | limitTo: quickviewItem.rating"></span>
+				<span class="fa fa-star-o" ng-repeat="star in maxStars | limitTo: maxStars.length - quickviewItem.rating"></span>
+			</div>
+
+			<div class="qvn_availableIn" ng-if="quickviewItem.availableIn && (deliveryOptions[0].showType === 'delivery' && deliveryOptions[0].deliveryText)">
+				Available for delivery {{quickviewItem.availableIn}}
+			</div>
+			<div class="qvn_availableIn" ng-if="quickviewItem.availableIn && (deliveryOptions[0].showType === 'collection' && deliveryOptions[0].collection)">
+				Available for collection {{quickviewItem.availableIn}}
+			</div>
+
+			<div class="qvn_paragraph">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda recusandae tempore dolor, animi alias totam aut doloremque debitis expedita deserunt excepturi sequi pariatur, obcaecati iusto consectetur eum quaerat dolores consequuntur!
+			</div>
+			
+			<div class="buttonGrey qvn_moreButton" ng-click="openPDP(quickviewItem, true, false)" stopeventpropagation>
+				More Details
+			</div>
+
+			<div class="qvn_titleSeeMore mobileOnly">
+				See More Like This
+			</div>
+
+			<div class="qvn_seeMoreContainer group mobileOnly">
+				<div class="qvn_seeMore" ng-repeat="seeMore in quickviewItem.seeMore | limitTo: 4" ng-click="searchRouter({'seeMoreClick': seeMore, 'fromQV': true})">
+					{{seeMore}}
+				</div>
+			</div>
+
+			<div class="buttonGreen qvn_coldelButton qvn_coldelButtonClear" ng-click="openQuickviewOverlay('collection')" stopeventpropagation>
+				Reserve for Collection
+			</div>
+
+			<div class="buttonGreen qvn_coldelButton" ng-click="openQuickviewOverlay('payment')" stopeventpropagation>
+				Deliver To Me
+			</div>
+		</div>
+		<div class="qvn_right">
+			<div class="qvn_rightActions" ng-click="openQuickviewOverlay('collection')">
+				<div class="qvn_rightActionsContent">
+					<div class="qvn_rightActionsButton">
+						Reserve for Collection
+					</div>
+				</div>
+			</div>
+			<div class="qvn_rightActions" ng-click="openQuickviewOverlay('payment')">
+				<div class="qvn_rightActionsContent">
+					<div class="qvn_rightActionsButton">
+						Deliver To Me
+					</div>
+				</div>
+			</div>
+		</div>
+	</span>
+	
+	<div class="qvn_overlay group" ng-class="{'qvn_overlayOpen': quickviewItem.openOverlay}">
+		<div class="qvn_overlayClose" ng-click="quickviewItem.openOverlay = null">
+			<span class="fa fa-angle-right"></span>
+		</div>
+	<!-- Collection Details -->
+		<div class="qvn_overlayInner qvn_overlayInner_collection group" ng-show="quickviewItem.openOverlay === 'collection'">
+			<div class="qvn_title">
+				Enter Your Details
+			</div>
+
+			<div class="productInfoContinueShopping"  ng-click="openQuickviewOverlay()">
+				or continue shopping
+			</div>
+
+			<div class="qvForm form-group">
+				<label for="exampleInputEmail1">Email address</label>
+				<input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+			</div>
+
+			<div class="qvForm form-group">
+				<label for="exampleInputPassword1">Phone Number</label>
+				<input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+			</div>
+			  
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"> Sign up to newsletter
+				</label>
+			</div>
+			<div class="qvReserve" ng-click="openQuickviewOverlay('confirmed')">Reserve</div>
+		</div>
+	<!-- Cnfirmation Details -->
+		<div class="qvn_overlayInner qvn_overlayInner_confirmed group" ng-show="quickviewItem.openOverlay === 'confirmed'">
+			<div class="qvn_title">
+				Thank you
+			</div>
+
+			<div class="productInfoContinueShopping" ng-click="openQuickviewOverlay()">
+				(continue shopping)
+			</div>
+
+			<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+				Your reservation is now complete and being prepared for your arrival. You should receive a confirmation email shortly.
+			</div>
+
+			<div class="productInfoBoxResDetails">
+				<div class="productInfoBoxResRow">
+					Reservation Number: 12345
+				</div>
+				<div class="productInfoBoxResRow">
+					Collect from <strong>Milton Keynes</strong>
+				</div>
+				<div class="productInfoBoxResRow">
+					Available to collect in <strong>90 mins</strong>
+				</div>	
+			</div>
+
+			<div class="productInfoPayQuestion group">
+				<div class="productInfoPayQuestionIcon">
+					<span class="ico ico-fasttrack"></span>
+				</div>
+
+				<span class="productInfoPayQuestionText">
+					Would you like to pay now?
+				</span>
+				
+				<div class="productInfoPayNowButton" ng-click="openQuickviewOverlay('payment')" stopeventpropagation>
+					Pay Now
+				</div>
+			</div>
+		</div>
+	<!-- Confirmation Details -->
+		<div class="qvn_overlayInner qvn_overlayInner_payment group" ng-show="quickviewItem.openOverlay === 'payment'">
+			<div class="qvn_title">
+				Payment method
+			</div>
+
+			<div class="productInfoContinueShopping" ng-click="openQuickviewOverlay()">
+				or continue shopping
+			</div>
+
+			<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+				Choose how you would like to pay
+			</div>
+
+			<div class="productInfoBoxResCardDetails">
+				<img src="img/payment.png" alt="">
+			</div>
+
+			<div class="qvReserve" ng-click="openQuickviewOverlay()">Continue</div>
+		</div>
+
+	</div>
+			

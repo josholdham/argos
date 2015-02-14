@@ -1,0 +1,209 @@
+<div class="welcomeScreen" ng-show = "showWelcome">
+
+	<div class="welcomeScreenClose" ng-click = "showWelcome = false">
+		&times;
+	</div>
+	
+	<div class="welcomeScreenContent">
+		<p>
+			<strong>Hello and welcome.</strong> This is one of the prototypes I created during my time at Argos. It isn't necessarilly supposed to be public so I'd appreciate it if you keep the link private.
+		</p>
+		<p>
+			Given the lean nature of the project (and the on-the-fly design process), things were kept flexible by only really building to support Google Chrome.
+		</p>
+		<p>
+			Finally, not all functionality moved beyond dummy stage - we were building around testing certain specific user journeys. For instance, there aren't many products in our test database. If you want to explore, I'd suggest searching for something like 'rings' or 'sofas'.
+		</p>
+	</div>
+	
+	
+</div>
+
+<div class="outer" style="height: {{returnGridPosition('all') + 24}}px" ng-init="init()">
+<div resize id="grid" ng-class="{'gridArea_2': settings.design === 2}">
+	
+<!-- TIMELINE MARKERS -->
+	<span timeline-markers></span>
+
+	<div class="allContent group">
+
+		<div class="sidebarIcon"  ng-show="noResults  && ctrl !== 'pdpCtrl'">
+			<div class="sidebarText">
+				Sorry, no search results found for <span class="red">{{searchTerm}}</span>
+			</div>
+		</div>
+
+<!-- LIST ITEM -->
+		<span list-items></span>
+
+		<span tile-fixed></span>
+
+<!-- SEARCH RESULTS CONTAINER -->
+		
+		<div class="sr_otherItemsBreak sidebarText" ng-if="exactMatch.length > 0 && showTimeline && ((searchActive || ctrl === 'pdpCtrl') && viewType !== 'list')">
+			Available for {{deliveryOptions[0].showType}} 
+			<span ng-if="deliveryOptions[0].showType === 'delivery'">
+				to {{deliveryOptions[0].deliveryText}} in 8 hours
+			</span>
+			<span ng-if="deliveryOptions[0].showType === 'collection'">
+				from {{deliveryOptions[0].collection}} in 2 hours
+			</span>
+		</div>
+
+		<div class="sr_container sr_containerExactMatch group" ng-if="(searchActive || ctrl === 'pdpCtrl') && viewType !== 'list'">
+
+			<span class="pseudoTile" ng-repeat="item in exactMatch">
+				<span sr-tile></span>
+				<div class='qvn' qvn ng-if="($index + 1) === numberOfCols || ($index + 1) % numberOfCols === 0 || $index >= (exactMatch.length - 1)">
+				</div>
+			</span>
+
+			<div class="sr_otherItemsBreak" ng-if="exactMatch.length > 0 && !noResults">
+				<span ng-show="!showTimeline">
+					Related Items
+				</span>
+				<span ng-show="showTimeline">
+					Similar products available ...
+				</span>
+			</div>
+		</div>
+
+<!-- SEARCH RESULTS CONTAINER -->
+		<div class="sr_container group" ng-class="{'sr_container_thumbnails' : viewType === 'thumbnails' && ctrl !== 'pdpCtrl'}" ng-if="(searchActive || ctrl === 'pdpCtrl') && viewType !== 'list'">
+	<!-- If we have an exact match, so show a break if there are related items -->
+
+			<span class="pseudoTile" ng-repeat="item in searchResults | limitTo: srLimit">
+				<span sr-tile></span>
+
+				<div class='qvn' qvn ng-if="($index + 1) === numberOfCols || ($index + 1) % numberOfCols === 0 || $index >= (searchResults.length - 1)"></div>
+			</span>
+
+	<!-- ALL OTHER ITEMS BREAK HERE -->
+			<div class="sr_otherItemsBreak" ng-if="extraItems.length > 0 && !noResults">
+				All Other Items
+			</div>
+
+			<span class="pseudoTile" ng-repeat="item in extraItems | limitTo: srExtraLimit">
+
+				<span sr-tile></span>
+
+				<div class='qvn' qvn ng-if="($index + 1) === numberOfCols || ($index + 1) % numberOfCols === 0 || $index >= (extraItems.length - 1)"></div>
+				
+			</span>
+		</div>
+
+<!-- HOME RESULTS CONTAINER -->
+		<div class="sr_container" ng-if="!searchActive && ctrl !== 'pdpCtrl'">
+			<div class="hg_leftCol">
+				<div class="hg_bigTileOuter">
+					<div class="hg_bigTileInner" ng-style="{'background-image': 'url('+largePromos[0].image+')'}">
+						<div class="sr_infoDummy"></div>
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[0].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[1].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+			</div>
+			<div class="hg_centerCol">
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[2].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[3].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+				<div class="hg_bigTileOuter">
+					<div class="hg_bigTileInner" ng-style="{'background-image': 'url('+largePromos[0].image+')'}">
+						<div class="sr_infoDummy"></div>
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[4].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+				<div class="hg_smallTileOuter">
+					<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[7].image+')'}">
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+			</div>
+			<div class="hg_rightCol">
+
+				<div class="hg_rightColSmallContainer">
+					<div class="hg_smallTileOuter">
+						<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[5].image+')'}">
+							<div class="sr_infoDummy"></div>
+						</div>
+					</div>
+
+					<div class="hg_smallTileOuter">
+						<div class="hg_smallTileInner" ng-style="{'background-image': 'url('+promos[6].image+')'}">
+							<div class="sr_infoDummy"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="hg_bigTileOuter">
+					<div class="hg_bigTileInner" ng-style="{'background-image': 'url('+largePromos[1].image+')'}">
+						<div class="sr_infoDummy"></div>
+						<div class="sr_infoDummy"></div>
+					</div>
+				</div>
+			</div>
+
+	<!-- HOME HEADERS -->
+			<div class='sr_homeHeaders group' ng-if="home2">
+				<span class="homeHeader turquoiseBG" ng-class="{'selected': home2Filter === 'bestSeller'}" ng-click="homeHeaderClick('bestSeller')">
+					Top Sellers
+				</span>
+				<span class="homeHeader purpleBG" ng-class="{'selected': home2Filter === 'clearance'}" ng-click="homeHeaderClick('clearance')">
+					Clearance
+				</span>
+				<span class="homeHeader redBG" ng-class="{'selected': home2Filter === 'priceCuts'}" ng-click="homeHeaderClick('priceCuts')">
+					Price Cuts
+				</span>
+				<span class="homeHeader orangeBG" ng-class="{'selected': home2Filter === 'looking'}" ng-click="homeHeaderClick('looking')">
+					What Others are looking at
+				</span>
+				<span class="homeHeader limeGreenBG" ng-class="{'selected': home2Filter === 'new'}" ng-click="homeHeaderClick('new')">
+					New Arrivals
+				</span>
+			</div>
+
+			<div class="sr_home">
+				<span class="pseudoTile" ng-repeat="item in searchResults | limitTo: 5">
+					<span sr-tile></span>
+
+					<div class='qvn' qvn ng-if="($index + 1) === numberOfCols || ($index + 1) % numberOfCols === 0">
+					</div>
+					
+				</span>
+			</div>	
+		</div>
+		
+			
+	
+			
+
+			
+
+		<div class="infiniteLoadContainer" ng-show="onSearch && viewType !== 'list'">
+			<img src="img/loading_wheel.png" alt="">
+		</div>
+	</div>
+</div>
+</div>

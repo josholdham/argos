@@ -1,0 +1,157 @@
+<!-- New expanded QV Design -->
+						<div class="productInfoBox productInfoBoxExpanded" ng-show="!item.collection"  ng-class="{'productInfoBoxNewDesign' : settings.expandedDesign === 'new'}">
+							<div class="productInfoBoxTitle" once-text="item.title" ng-class="{'productInfoBoxTitleShow' : settings.textExpands}">
+							</div>
+							<div class="productInfoBoxInfo">
+								<span class="productInfoBoxInfoPrice" once-text="item.price">
+
+								</span>
+								<span class="productInfoBoxInfoPriceWas" ng-show="gridCols !==2" once-if="item.was" once-text="item.was">
+
+								</span>
+								<span class="productInfoBoxInfoStars">
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+									<span class="fa fa-star-o"></span>
+									<span class="fa fa-star-o"></span>
+								</span>
+							</div>
+							<div class="productInfoBoxDescription">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita dolore cum ex repudiandae quas sequi obcaecati maxime, vel, architecto, aut, natus repellendus eligendi animi. Libero dicta perferendis, earum nemo soluta!
+							</div>
+							<div class="productInfoBoxMore" ng-click="openPDP(item, true, false)">
+								More Details
+							</div>
+							<span class="moreDetailsLeft ico ico-ValentinesDay"></span>
+							<span class="moreDetailsLeft ico fa fa-plus"></span>
+
+
+							<div class="productInfoIconRow" stopeventpropagation>
+								<span class="ico ico-ApplyInStore" ng-click="changeItemCollection(item, 'collect')"></span>
+								<span class="ico ico-Delivery" ng-click="changeItemCollection(item, 'pay')"></span>
+								<span class="ico ico-ValentinesDay"></span>
+								<span class="ico fa fa-plus"></span>
+							</div>
+
+							<div class="productInfoBoxNewDesignSeeMore" stopeventpropagation>
+								<div class="productInfoBoxNewDesignSeeMoreHeader">
+									See More Like This
+								</div>
+								<div class="productInfoBoxNewDesignSeeMoreTags">
+									<div class="productInfoBoxNewDesignSeeMoreTag" ng-repeat="tag in item.seeMore" ng-click="searchRouter({'filtersArray': [tag], 'blocks': 2,'currentBlockCount': 0, 'clickedFilter': true})">
+										{{tag}}
+									</div>
+								</div>
+							</div>
+						</div>
+			<!--  Expanded QV Design - Collection -->
+
+					<div class="productInfoBox productInfoBoxExpanded productInfoBoxExpandedCollection" ng-show="item.collection === 'collection'" stopeventpropagation>
+						<div class="productInfoBoxTitle">
+							Enter Your Details
+						</div>
+
+						<div class="productInfoContinueShopping"  ng-click="changeItemCollection(item, null)">
+							or continue shopping
+						</div>
+
+						<div class="qvForm form-group">
+							<label for="exampleInputEmail1">Email address</label>
+							<input type="email" class="form-control" id="exampleInputEmail1" ng-model="collectEmail" placeholder="Enter email">
+						</div>
+
+						<div class="qvForm form-group">
+							<label for="exampleInputPassword1">Phone Number</label>
+							<input type="tel" class="form-control" id="exampleInputPassword1" ng-model="collectPhone" placeholder="Phone Number">
+						</div>
+						  
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> Sign up to newsletter
+							</label>
+						</div>
+						
+						<div class="qvReserve" ng-click="changeItemCollection(item, 'confirm')">Reserve</div>
+					</div>
+
+
+					<div class="productInfoBox productInfoBoxExpanded productInfoBoxExpandedCollection" ng-show="item.collection === 'confirm'" stopeventpropagation>
+						<div class="productInfoBoxTitle">
+							Thank you
+						</div>
+
+						<div class="productInfoContinueShopping" ng-click="changeItemCollection(item, null)">
+							or continue shopping
+						</div>
+
+						<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+							Your reservation is now complete and being prepared for your arrival. You should receive a confirmation email shortly.
+						</div>
+
+						<div class="productInfoBoxResDetails">
+							<div class="productInfoBoxResRow">
+								Reservation Number: 12345
+							</div>
+							<div class="productInfoBoxResRow">
+								Collect from <strong>London Victoria</strong>
+							</div>
+							<div class="productInfoBoxResRow">
+								Available to collect in <strong>90 mins</strong>
+							</div>	
+						</div>
+					</div>
+
+
+					<div class="productInfoBox productInfoBoxExpanded productInfoBoxExpandedCollection" ng-show="item.collection === 'pay'" stopeventpropagation>
+						<div class="productInfoBoxTitle">
+							Payment method
+						</div>
+
+						<div class="productInfoContinueShopping" ng-click="changeItemCollection(item, null)">
+							or continue shopping
+						</div>
+
+						<div class="productInfoBoxDescription productInfoBoxDescriptionLarge">
+							Choose how you would like to pay
+						</div>
+
+						<div class="productInfoBoxResCardDetails">
+							<img src="img/payment.png" alt="">
+						</div>
+					</div>
+		<!-- Expanded QV - Bottom sections -->
+						<div class="productInfoBox productInfoBoxExpandedBottom" stopeventpropagation  ng-class="{'productInfoBoxNewDesign' : settings.expandedDesign === 'new'}" ng-show="!item.collection">
+							<div class="productInfoBoxExpandedBottomTag" ng-repeat="tag in item.seeMore" ng-click="searchRouter({'filtersArray': [tag], 'blocks': 2,'currentBlockCount': 0, 'clickedFilter': true})">
+								{{tag}}
+							</div>
+
+							<div class="bottomCollectNow" ng-click="changeItemCollection(item, 'collection')">
+								<span class="ico ico-ApplyInStore"></span>
+								Collect Now
+							</div>
+							<div class="bottomDelivery" ng-click="changeItemCollection(item, 'pay')">
+								<span class="ico ico-Delivery"></span>
+								Deliver To Me
+							</div>
+						</div>
+
+						<div class="productInfoPayQuestion" ng-show="item.collection === 'confirm'">
+							<div class="productInfoPayQuestionIcon">
+								<span class="ico ico-fasttrack"></span>
+							</div>
+
+							<span class="productInfoPayQuestionText">
+								Would you like to pay now?
+							</span>
+							
+							<div class="productInfoPayNowButton" ng-click="changeItemCollection(item, 'pay')" stopeventpropagation>
+								Pay Now
+							</div>
+						</div>
+
+						<div class="productInfoPayContinue" ng-show="item.collection === 'pay'">
+							<div class="productInfoPayNowButton" ng-click="changeItemCollection(item, null)" stopeventpropagation>
+								Continue
+							</div>
+						</div>
